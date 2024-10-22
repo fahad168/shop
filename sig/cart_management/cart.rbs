@@ -1,0 +1,8 @@
+module CartManagement
+  class Cart
+    @cart: untyped
+    @user_id: untyped
+
+    def create_cart: -> String
+  end
+end

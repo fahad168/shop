@@ -1,0 +1,7 @@
+module CartManagement
+  module Generators
+    class InstallGenerator
+      @prev_migration_nr: untyped
+    end
+  end
+end
