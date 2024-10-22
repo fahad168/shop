@@ -1,6 +1,6 @@
 module CartManagement
   class Cart
-
+    attr_reader :user_id,
     def initialize(user_id)
       @user_id = user_id
     end
