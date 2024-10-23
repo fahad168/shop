@@ -3,6 +3,7 @@
 require_relative "cart_management/version"
 require "rails/railtie"
 require_relative "generators/install_generator"
+require_relative 'cart_management/cart'
 
 module CartManagement
   class Railtie < Rails::Railtie
