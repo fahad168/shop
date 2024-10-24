@@ -3,7 +3,7 @@
 require_relative "lib/shop/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "shop"
+  spec.name = "e-commerce_shop"
   spec.version = Shop::VERSION
   spec.authors = ["Fahadbutt"]
   spec.email = ["buttf5169@gmail.com"]
