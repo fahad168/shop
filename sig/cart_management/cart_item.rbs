@@ -1,0 +1,24 @@
+module CartManagement
+  class CartItem
+    attr_reader cart_id: untyped
+    attr_reader product_id: untyped
+    attr_reader variant_id: untyped
+    attr_reader quantity: untyped
+    attr_reader size_id: untyped
+
+    @cart: untyped
+    @product: untyped
+    @variant: untyped
+    @size: untyped
+
+    def initialize: (Integer, nil | Integer, nil | Integer, nil | Integer) -> untyped
+    def cart_items: () -> { message: String, cart_item: Array[CartItem] | nil, status: Symbol }
+    def create: (Integer, Float) -> { message: String, cart_item: CartItem | nil, status: Symbol }
+    def delete: (Integer) -> { message: String, cart_item: CartItem | nil, status: Symbol }
+    def update_quantity: (Integer, Integer, Float, 'add' | 'remove') -> { message: String, cart_item: CartItem | nil, status: Symbol }
+
+    private
+
+    def update_cart_amount: -> untyped
+  end
+end

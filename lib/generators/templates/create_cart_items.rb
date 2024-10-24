@@ -4,8 +4,9 @@ class CreateCartItems < ActiveRecord::Migration[6.0]
       t.references :cart, null: false, foreign_key: true
       t.references :product, null: true, foreign_key: true
       t.references :variant, null: true, foreign_key: true
+      t.references :size, null: true, foreign_key: true
       t.integer :quantity
-      t.string :size
+      t.float :amount
 
       t.timestamps
     end

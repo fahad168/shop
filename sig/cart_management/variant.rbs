@@ -1,0 +1,16 @@
+module CartManagement
+  class Variant
+    attr_reader color: untyped
+    attr_reader name: untyped
+    attr_reader product_id: untyped
+    attr_reader variant_id: untyped
+
+    @product: untyped
+    @variant: untyped
+
+    def create: (Integer, String, String) -> { message: String, variant: Variant | nil, status: Symbol }
+    def specific_product_variants: (Integer, (:asc | :desc), String | nil) -> { message: String, variants: Array[Variant] | nil, status: Symbol }
+    def update: (Integer, Hash[Symbol, String | Float | Integer]) -> { message: String, variant: Variant | nil, status: Symbol }
+    def delete: (Integer) -> { message: String, variant: Variant | nil, status: Symbol }
+  end
+end

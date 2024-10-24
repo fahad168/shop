@@ -1,0 +1,19 @@
+module CartManagement
+  class Product
+    attr_reader country: untyped
+    attr_reader delivery_fee: untyped
+    attr_reader description: untyped
+    attr_reader name: untyped
+    attr_reader price: untyped
+    attr_reader user_id: untyped
+
+    @product: untyped
+    @product_hash: Hash[untyped, untyped]
+
+    def initialize: (Integer) -> untyped
+    def create: (String, Float, String | nil, Float | nil, String | nil) -> { message: String, product: Product | nil, status: Symbol }
+    def specific_user_products: ((:asc | :desc), String | nil) -> { message: String, products: Array[Product] | nil, status: Symbol }
+    def update: (Hash[Symbol, Integer | String | Float], Integer) -> { message: String, product: Product | nil, status: Symbol }
+    def delete: (Integer) -> { message: String, product: Product | nil, status: Symbol }
+  end
+end

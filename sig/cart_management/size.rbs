@@ -1,0 +1,18 @@
+module CartManagement
+  class Size
+    attr_reader name: untyped
+    attr_reader product_id: untyped
+    attr_reader quantity: untyped
+    attr_reader short_form: untyped
+    attr_reader variant_id: untyped
+
+    @variant: untyped
+    @size: untyped
+
+    def specific_variant_sizes: (Integer, (:asc | :desc), String | nil) -> { message: String, sizes: Array[Size] | nil, status: Symbol }
+    def create_single_size: (Integer | nil, String, String, Integer) -> { message: String, size: Size | nil, status: Symbol }
+    def create_multiple_sizes: (Array[Hash[Symbol, String | Float | Integer]]) -> { message: String, size: Size | nil, status: Symbol }
+    def delete: (Integer) -> { message: String, size: Size | nil, status: Symbol }
+    def update: (Integer, Hash[Symbol, Integer | Float | String]) -> { message: String, size: Size | nil, status: Symbol }
+  end
+end

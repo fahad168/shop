@@ -1,8 +1,14 @@
 module CartManagement
   class Cart
+    attr_reader user_id: untyped
+
     @cart: untyped
     @user_id: untyped
 
-    def create_cart: -> String
+    def initialize: (Integer) -> { message: String, cart: Cart | nil, status: Symbol }
+    def clear: () -> { message: String, cart: Cart | nil, status: Symbol }
+    def create: () -> { message: String, cart: Cart | nil, status: Symbol }
+    def delete: () -> { message: String, cart: Cart | nil, status: Symbol }
+    def specific_user_cart: () -> { message: String, cart: Cart | nil, status: Symbol }
   end
 end
