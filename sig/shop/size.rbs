@@ -1,4 +1,4 @@
-module CartManagement
+module Shop
   class Size
     attr_reader name: untyped
     attr_reader product_id: untyped

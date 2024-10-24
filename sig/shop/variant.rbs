@@ -1,4 +1,4 @@
-module CartManagement
+module Shop
   class Variant
     attr_reader color: untyped
     attr_reader name: untyped

@@ -1,4 +1,4 @@
-module CartManagement
+module Shop
   class CartItem
     attr_reader :cart_id, :product_id, :variant_id, :quantity, :size_id
 

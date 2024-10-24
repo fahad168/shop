@@ -2,7 +2,7 @@
 
 # Require RSpec and any other necessary testing libraries
 # require "rspec/rails"
-require "cart_management"
+require "shop"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

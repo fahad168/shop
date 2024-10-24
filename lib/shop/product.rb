@@ -1,4 +1,4 @@
-module CartManagement
+module Shop
   class Product
     attr_reader :user_id, :name, :price, :description, :delivery_fee, :country
 

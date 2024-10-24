@@ -1,4 +1,4 @@
-module CartManagement
+module Shop
   class Product
     attr_reader country: untyped
     attr_reader delivery_fee: untyped

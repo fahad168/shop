@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require_relative "cart_management/version"
+require_relative "shop/version"
 require "rails/railtie"
 require_relative "generators/install_generator"
-require_relative 'cart_management/cart'
+require_relative 'shop/cart'
 
 module CartManagement
   class Railtie < Rails::Railtie
-    initializer "cart_management.install_migration" do |app|
+    initializer "shop.install_migration" do |app|
     end
   end
   class Error < StandardError; end

@@ -1,4 +1,4 @@
-module CartManagement
+module Shop
   class Variant
     attr_reader :product_id, :variant_id, :name, :color
 

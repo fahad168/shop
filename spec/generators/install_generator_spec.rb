@@ -1,8 +1,8 @@
 # spec/generators/install_generator_spec.rb
 require 'rails_helper'
-require "cart_management/generators/install_generator"
+require "shop/generators/install_generator"
 
-RSpec.describe CartManagement::Generators::InstallGenerator, type: :generator do
+RSpec.describe Shop::Generators::InstallGenerator, type: :generator do
   destination File.expand_path('../../tmp/generators', __FILE__)
 
   # Include the generator test case behavior
