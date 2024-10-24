@@ -9,7 +9,7 @@ module Shop
 
     # Get Cart For User
     def specific_user_cart
-      cart = Cart.where(user_id: @user_id)
+      cart = ::Cart.where(user_id: @user_id)
       if cart.present?
         { message: 'Cart Found Successfully', cart: cart, status: :found }
       else

@@ -3,10 +3,10 @@ module Shop
     attr_reader :cart_id, :product_id, :variant_id, :quantity, :size_id
 
     def initialize(cart_id, product_id = nil, variant_id = nil, size_id = nil)
-      @cart = Cart.find_by(id: cart_id) if cart_id
-      @product = Product.find_by(id: product_id) if product_id
-      @variant = Variant.find_by(id: variant_id) if variant_id
-      @size = Size.find_by(id: size_id) if size_id
+      @cart = ::Cart.find_by(id: cart_id) if cart_id
+      @product = ::Product.find_by(id: product_id) if product_id
+      @variant = ::Variant.find_by(id: variant_id) if variant_id
+      @size = ::Size.find_by(id: size_id) if size_id
     end
 
     # Cart Items
@@ -23,7 +23,7 @@ module Shop
     def create(quantity, amount)
       return { message: 'Cart not found', cart_item: nil, status: :not_found } unless @cart
 
-      cart_item = CartItem.new(cart_id: @cart.id, product_id: @product.id, variant_id: @variant.id, size_id: @size.id, quantity: quantity, amount: amount)
+      cart_item = ::CartItem.new(cart_id: @cart.id, product_id: @product.id, variant_id: @variant.id, size_id: @size.id, quantity: quantity, amount: amount)
       if cart_item.save
         update_cart_amount(amount, 'add')
         { message: 'Item Added Successfully', cart_item: cart_item, status: :created }
@@ -34,7 +34,7 @@ module Shop
 
     # Update Cart Item Quantity
     def update_quantity(cart_item_id, quantity, amount, key)
-      return { message: 'Cart Item not found', cart_item: nil, status: :not_found } unless (cart_item = CartItem.find_by(id: cart_item_id))
+      return { message: 'Cart Item not found', cart_item: nil, status: :not_found } unless (cart_item = ::CartItem.find_by(id: cart_item_id))
 
       quantity = key == 'add' ? +quantity : -quantity
       new_amount = key == 'add' ? +amount : -amount
@@ -50,7 +50,7 @@ module Shop
 
     # Deletes the Cart Item
     def delete(cart_item_id)
-      return { message: 'Cart Item not found', cart_item: nil, status: :not_found } unless (cart_item = CartItem.find_by(id: cart_item_id))
+      return { message: 'Cart Item not found', cart_item: nil, status: :not_found } unless (cart_item = ::CartItem.find_by(id: cart_item_id))
 
       if cart_item.destroy
         update_cart_amount(cart_item.amount, 'remove')

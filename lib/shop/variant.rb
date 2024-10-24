@@ -7,7 +7,7 @@ module Shop
     end
 
     def specific_product_variants(product_id, order, q)
-      variants = Variant.where(product_id: product_id).order(created_at: order)
+      variants = ::Variant.where(product_id: product_id).order(created_at: order)
       variants = variants.where('LOWER(name) ILIKE ? OR LOWER(color) ILIKE ? ', "%#{q.downcase}%") if q.present?
       if variants.present?
         { message: 'Variants Found Successfully', variants: variants, status: :found }
@@ -18,7 +18,7 @@ module Shop
 
     # Creates a new Variant
     def create(product_id, name, color)
-      variant = Variant.new(product_id: product_id, name: name, color: color)
+      variant = ::Variant.new(product_id: product_id, name: name, color: color)
       if variant.save
         { message: 'Variant Created Successfully', variant: variant, status: :created }
       else
@@ -28,7 +28,7 @@ module Shop
 
     # Updates an existing Variant
     def update(variant_id, variant_hash)
-      return { message: 'Variant not found', variant: nil, status: :not_found } unless (variant =  Variant.find_by(id: variant_id))
+      return { message: 'Variant not found', variant: nil, status: :not_found } unless (variant =  ::Variant.find_by(id: variant_id))
 
       if variant.update(variant_hash)
         { message: 'Variant Updated Successfully', variant: variant, status: :updated }
@@ -39,7 +39,7 @@ module Shop
 
     # Deletes the Variant
     def delete(variant_id)
-      return { message: 'Variant not found', variant: nil, status: :not_found } unless (variant =  Variant.find_by(id: variant_id))
+      return { message: 'Variant not found', variant: nil, status: :not_found } unless (variant =  ::Variant.find_by(id: variant_id))
 
       if variant.destroy
         { message: 'Variant Deleted Successfully', variant: nil, status: :deleted }
