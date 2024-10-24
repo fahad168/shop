@@ -9,7 +9,7 @@ module Shop
     # Specific Variant Sizes
     def specific_variant_sizes(variant_id, order, q)
       sizes = ::Size.where(variant_id: variant_id).order(created_at: order)
-      sizes = sizes.where('LOWER(name) ILIKE ? OR LOWER(short_name) ILIKE ? ', "%#{q.downcase}%") if q.present?
+      sizes = sizes.where('LOWER(name) ILIKE :query OR LOWER(short_name) ILIKE :query', query: "%#{q.downcase}%") if q.present?
       if sizes.present?
         { message: 'Sizes Found Successfully', sizes: sizes, status: :found }
       else

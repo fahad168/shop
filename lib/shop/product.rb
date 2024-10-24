@@ -9,7 +9,7 @@ module Shop
     # Specific User Products
     def specific_user_products(order, q)
       products = ::Product.where(user_id: @user_id).order(created_at: order)
-      products = products.where('LOWER(name) ILIKE ? OR LOWER(country) ILIKE ? ', "%#{q.downcase}%") if q.present?
+      products = products.where('LOWER(name) ILIKE :query OR LOWER(country) ILIKE :query', query: "%#{q.downcase}%") if q.present?
       if products.present?
         { message: 'Product Found Successfully', products: products, status: :found }
       else

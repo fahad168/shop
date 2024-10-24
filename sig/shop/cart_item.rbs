@@ -11,7 +11,7 @@ module Shop
     @variant: untyped
     @size: untyped
 
-    def initialize: (Integer, nil | Integer, nil | Integer, nil | Integer) -> untyped
+    def initialize: (Integer, Integer, Integer, nil | Integer) -> untyped
     def cart_items: () -> { message: String, cart_item: Array[CartItem] | nil, status: Symbol }
     def create: (Integer, Float) -> { message: String, cart_item: CartItem | nil, status: Symbol }
     def delete: (Integer) -> { message: String, cart_item: CartItem | nil, status: Symbol }

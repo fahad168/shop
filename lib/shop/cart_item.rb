@@ -2,7 +2,7 @@ module Shop
   class CartItem
     attr_reader :cart_id, :product_id, :variant_id, :quantity, :size_id
 
-    def initialize(cart_id, product_id = nil, variant_id = nil, size_id = nil)
+    def initialize(cart_id, product_id, variant_id, size_id = nil)
       @cart = ::Cart.find_by(id: cart_id) if cart_id
       @product = ::Product.find_by(id: product_id) if product_id
       @variant = ::Variant.find_by(id: variant_id) if variant_id

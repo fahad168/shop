@@ -8,7 +8,7 @@ module Shop
 
     def specific_product_variants(product_id, order, q)
       variants = ::Variant.where(product_id: product_id).order(created_at: order)
-      variants = variants.where('LOWER(name) ILIKE ? OR LOWER(color) ILIKE ? ', "%#{q.downcase}%") if q.present?
+      variants = variants.where('LOWER(name) ILIKE :query OR LOWER(color) ILIKE :query ', query: "%#{q.downcase}%") if q.present?
       if variants.present?
         { message: 'Variants Found Successfully', variants: variants, status: :found }
       else
