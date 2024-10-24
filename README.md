@@ -8,30 +8,34 @@ Shop is a comprehensive e-commerce solution for Rails that simplifies cart and p
 * Easily customizable to fit different e-commerce platforms;
 * Built with scalability in mind to handle various product configurations and user demands.
 
-It's mainly composed of 5 modules
-[**Cart**](https://www.rubydoc.info/gems/e-commerce_shop/0.1.0/Shop/Cart): Can Create, Delete or Clear cart for the user by using this module.
-[**Products**](https://www.rubydoc.info/gems/e-commerce_shop/0.1.0/Shop/Product): Can Create, Update, Delete or get specific user products by using this module.
-[**Variants**](https://www.rubydoc.info/gems/e-commerce_shop/0.1.0/Shop/Variant): Can Create, Update, Delete or get specific user variant against product by using this module.
-[**Sizes**](https://www.rubydoc.info/gems/e-commerce_shop/0.1.0/Shop/Size): Can Create Single and multiple sizes, Update, Delete sizes by using this module.
-[**CartItems**](https://www.rubydoc.info/gems/e-commerce_shop/0.1.0/Shop/CartItem): Can Create, Add, Remove, Delete Items from the cart.
+It's mainly composed of 5 modules:
+* [**Cart**](https://www.rubydoc.info/gems/e-commerce_shop/0.1.0/Shop/Cart): Can Create, Delete or Clear cart for the user by using this module.
+* [**Products**](https://www.rubydoc.info/gems/e-commerce_shop/0.1.0/Shop/Product): Can Create, Update, Delete or get specific user products by using this module.
+* [**Variants**](https://www.rubydoc.info/gems/e-commerce_shop/0.1.0/Shop/Variant): Can Create, Update, Delete or get specific user variant against product by using this module.
+* [**Sizes**](https://www.rubydoc.info/gems/e-commerce_shop/0.1.0/Shop/Size): Can Create Single and multiple sizes, Update, Delete sizes by using this module.
+* [**CartItems**](https://www.rubydoc.info/gems/e-commerce_shop/0.1.0/Shop/CartItem): Can Create, Add, Remove, Delete Items from the cart.
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/cart_management`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 ## Table of Contents
-* [Information]
-  * [Ruby Version Compatibility]
-  * [Ruby Doc Documentation]
-* [Getting Started]
-* [Usage]
-  * [Cart]
-    * [Get Cart]
-    * [Create]
-    * [Delete]
-    * [Clear]
-  * [Products]
-  * [Variants]
-  * [Sizes]
-  * [CartItems]
+* [Information](#information)
+  * [Ruby Version Compatibility](#ruby-version-compatibility)
+  * [Ruby Doc Documentation](#ruby-doc-documentation)
+* [Getting Started](#getting-started)
+* [Usage](#usage)
+  * [Cart](#cart)
+    * [Get](#get)
+    * [Create](#create)
+    * [Delete](#delete)
+    * [Clear](#clear)
+  * [Products](#products)
+    * [Get](#get-1)
+    * [Create](#create-1)
+    * [Update](#update)
+    * [Delete](#delete-1)
+  * [Variants]()
+  * [Sizes]()
+  * [CartItems]()
 
 ## Information
 
@@ -70,7 +74,7 @@ Response for all these methods will be in the json format. For Example
 
     $ { message: 'Cart Found Successfully', cart: Cart, status: :found }
 
-#### Get Cart
+#### Get
 
 To get the specific user cart access the cart module with this method
 
