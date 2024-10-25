@@ -33,7 +33,11 @@ Welcome to your new gem! In this directory, you'll find the files you need to be
     * [Create](#create-1)
     * [Update](#update)
     * [Delete](#delete-1)
-  * [Variants]()
+  * [Variants](#variants)
+    * [Get](#get-2)
+    * [Create](#create-2)
+    * [Update](#update-1)
+    * [Delete](#delete-2)
   * [Sizes]()
   * [CartItems]()
 
@@ -127,9 +131,9 @@ product params.
 |--------------|-------------|
 | name         | String      |
 | price        | Float       |
-| description  | String, nil |
-| delivery_fee | Float, nil  |
-| country      | String, nil |
+| description  | String, Nil |
+| delivery_fee | Float, Nil  |
+| country      | String, Nil |
 
 
     $ Shop::Product.new(USER_ID).create(name, price, description, delivery_fee, country)
@@ -152,7 +156,59 @@ For Updating the product you need to call the update method for Product module w
 
 For Deleting the product just provide the product id and call the delete method.
 
-    $ Shop::Cart.new(USER_ID).delete(product_id)
+    $ Shop::Product.new(USER_ID).delete(product_id)
+
+
+### Variants
+
+Response for all these methods will be in the json format. For Example
+
+    $ { message: 'Variants Found Successfully', variants: Variant, status: :found }
+
+#### Get
+
+To get the specific product variants access the Variant module with this method `specific_product_variants` with three extra params.
+
+`product_id (Integer)`: This is the id of the product against you want to search for variants.
+`order (:asc | :desc)`: This will order the created products by ascending or descending order
+`q (String | nil)`: This will search the product by its name and country
+
+    $ Shop::Variant.new.specific_product_variants(1, :asc, nil)
+
+#### Create
+
+For Creation of Variant access the Variant module with this method `create` with three extra params
+
+**Supported Params**
+
+| param        | value       |
+|--------------|-------------|
+| product_id   | Integer     |
+| name         | String      |
+| color        | String      |
+
+    $ Shop::Variant.new.create(product_id, name, color)
+
+This will create the Variant for the product.
+
+#### Update
+For Updating the variant you need to call the update method for Variant module with params.
+
+**Supported Params**
+
+| params       | value            | Example                                                                         |
+|--------------|------------------|---------------------------------------------------------------------------------|
+| variant_id   | Integer          | Id for the Variant to update                                                    |
+| variant_hash | Hash[key, value] | {name: 'first product variant update', other params for product to update ....} |
+
+    $ Shop::Variant.new.update(product_id, variant_hash)
+
+#### Delete
+
+For Deleting the Variant just provide the Variant id and call the delete method.
+
+    $ Shop::Variant.new.delete(variant_id)
+
 
 ## Development
 
