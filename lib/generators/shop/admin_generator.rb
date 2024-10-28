@@ -25,20 +25,24 @@ module Shop
 
       # Copying controller templates
       def copy_controllers
-        template "controllers/shops_controller.rb", "app/controllers/shops/shops_controller.rb"
+        template "controllers/shops_controller.rb", "app/controllers/admin/shops_controller.rb"
       end
 
       # Copying view templates
       def copy_views
-        template "views/shops/index.html.erb", "app/views/shops/index.html.erb"
+        template "views/shops/index.html.erb", "app/views/admin/shops/index.html.erb"
+        template "views/shops/new.html.erb", "app/views/admin/shops/new.html.erb"
       end
 
       # Adding routes
       def add_routes
         route <<-RUBY
-          namespace :shops do
-            resources :shops
-          end
+          get "/shop", to: "admin/shops#index"
+          get "/shop/new", to: "admin/shops#new"
+          post "/shop", to: "admin/shops#create"
+          get "/shop/:id/edit", to: "admin/shops#edit"
+          put "/shop/:id/update", to: "admin/shops#update"
+          delete "/shop/:id/destroy", to: "admin/shops#destroy"
         RUBY
       end
 

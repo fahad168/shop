@@ -30,10 +30,9 @@ Gem::Specification.new do |spec|
   spec.post_install_message = <<-MESSAGE
     Thank you for installing Shop Gem!
 
-    To complete the installation, please run:
-
-    For Admin Side like creating shops, products, variants and sizes
+    For admin resources like migrations, models, controller and view, please run:
         rails g shop:install
+
   MESSAGE
 
   # Uncomment to register a new dependency of your gem
