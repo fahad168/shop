@@ -8,6 +8,7 @@ module Shop
       source_root File.expand_path("templates", __dir__)
 
       def copy_migration
+        puts "Copying migrations..."
         migration_template "create_shops.rb", "db/migrate/create_shops.rb"
         migration_template "create_carts.rb", "db/migrate/create_carts.rb"
         migration_template "create_products.rb", "db/migrate/create_products.rb"
@@ -17,6 +18,7 @@ module Shop
       end
 
       def copy_models
+        puts "Copying models..."
         template "shop.rb", "app/models/shops.rb"
         template "cart.rb", "app/models/cart.rb"
         template "cart_item.rb", "app/models/cart_item.rb"

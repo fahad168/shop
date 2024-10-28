@@ -10,6 +10,6 @@ gem "rake", "~> 13.0"
 
 gem "rubocop", "~> 1.21"
 
-group :development, :test do
-  gem "rspec-rails"
+group :development do
+  gem 'rspec-rails'
 end
