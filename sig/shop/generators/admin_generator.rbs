@@ -1,0 +1,7 @@
+module Shop
+  module Generators
+    class AdminGenerator
+      @prev_migration_nr: untyped
+    end
+  end
+end
