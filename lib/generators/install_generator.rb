@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails/generators"
 require "rails/generators/migration"
 
@@ -26,26 +28,6 @@ module Shop
         template "variant.rb", "app/models/variant.rb"
         template "size.rb", "app/models/size.rb"
       end
-
-      # def copy_controllers
-      #   template 'shops_controller.rb', 'app/controllers/shops/shops_controller.rb'
-      #   # template 'shops_controller.rb.tt', 'app/controllers/shops/shops_controller.rb'
-      #   # template 'products_controller.rb.tt', 'app/controllers/shops/products_controller.rb'
-      #   # template 'variants_controller.rb.tt', 'app/controllers/shops/variants_controller.rb'
-      #   # template 'sizes_controller.rb.tt', 'app/controllers/shops/sizes_controller.rb'
-      # end
-
-      # def copy_views
-      #   template "shops/index.html.erb.tt", "app/views/shops/shops/index.html.erb"
-      # end
-
-      # def add_routes
-      #   route <<-RUBY
-      #     namespace :shops do
-      #       resources :shops
-      #     end
-      #   RUBY
-      # end
 
       def self.next_migration_number(path)
         if @prev_migration_nr
