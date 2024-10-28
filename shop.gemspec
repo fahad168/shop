@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
-  spec.files = Dir["lib/shop/**/*.rb", "sig/**/*", "spec/**/*", "lib/generators/install_generator.rb"]
+  spec.files = Dir["lib/shops/**/*.rb", "sig/**/*", "spec/**/*", "lib/generators/install_generator.rb"]
   spec.bindir = "exe"
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
@@ -31,8 +31,8 @@ Gem::Specification.new do |spec|
 
     To complete the installation, please run:
 
-    For Admin Side like creating shop, products, variants and sizes
-        rails g shop:admin
+    For Admin Side like creating shops, products, variants and sizes
+        rails g shops:admin
   MESSAGE
 
   # Uncomment to register a new dependency of your gem

@@ -15,23 +15,23 @@ module Shop
       end
 
       def copy_models
-        template "shops/models/shop.rb", "app/models/shop.rb"
+        template "shops/models/shops.rb", "app/models/shops.rb"
         template "shops/models/product.rb", "app/models/product.rb"
         template "shops/models/variant.rb", "app/models/variant.rb"
         template "shops/models/size.rb", "app/models/size.rb"
       end
 
       def copy_controllers
-        template "shops/controllers/shops_controller.rb", "app/controllers/shop/shops_controller.rb"
+        template "shops/controllers/shops_controller.rb", "app/controllers/shops/shops_controller.rb"
       end
 
       def copy_views
-        template "shops/views/index.html.erb.tt", "app/views/shop/shops/index.html.erb"
+        template "shops/views/index.html.erb.tt", "app/views/shops/shops/index.html.erb"
       end
 
       def add_routes
         route <<-RUBY
-          namespace :shop do
+          namespace :shops do
             resources :shops
           end
         RUBY

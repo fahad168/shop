@@ -1,6 +1,6 @@
 # spec/generators/install_generator_spec.rb
 require 'rails_helper'
-require "shop/generators/install_generator"
+require "shops/generators/install_generator"
 
 RSpec.describe Shop::Generators::InstallGenerator, type: :generator do
   destination File.expand_path('../../tmp/generators', __FILE__)
