@@ -8,6 +8,7 @@ module Shop
       source_root File.expand_path("templates", __dir__)
 
       def copy_migration
+        migration_template "create_shop.rb", "db/migrate/create_shops.rb"
         migration_template "create_carts.rb", "db/migrate/create_carts.rb"
         migration_template "create_products.rb", "db/migrate/create_products.rb"
         migration_template "create_variants.rb", "db/migrate/create_variants.rb"
@@ -16,11 +17,32 @@ module Shop
       end
 
       def copy_models
+        template 'shop.rb', 'app/models/shop.rb'
         template 'cart.rb', 'app/models/cart.rb'
         template 'cart_item.rb', 'app/models/cart_item.rb'
         template 'product.rb', 'app/models/product.rb'
         template 'variant.rb', 'app/models/variant.rb'
         template 'size.rb', 'app/models/size.rb'
+      end
+
+      def copy_controllers
+        template 'shops_controller.rb', 'app/controllers/shop/shops_controller.rb'
+        # template 'shops_controller.rb.tt', 'app/controllers/shop/shops_controller.rb'
+        # template 'products_controller.rb.tt', 'app/controllers/shop/products_controller.rb'
+        # template 'variants_controller.rb.tt', 'app/controllers/shop/variants_controller.rb'
+        # template 'sizes_controller.rb.tt', 'app/controllers/shop/sizes_controller.rb'
+      end
+
+      def copy_views
+        template "shops/index.html.erb.tt", "app/views/shop/shops/index.html.erb"
+      end
+
+      def add_routes
+        route <<-RUBY
+          namespace :shop do
+            resources :shops
+          end
+        RUBY
       end
 
       def self.next_migration_number(path)

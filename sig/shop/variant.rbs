@@ -12,5 +12,10 @@ module Shop
     def specific_product_variants: (Integer, (:asc | :desc), String | nil) -> { message: String, variants: Array[Variant] | nil, status: Symbol }
     def update: (Integer, Hash[Symbol, String | Float | Integer]) -> { message: String, variant: Variant | nil, status: Symbol }
     def delete: (Integer) -> { message: String, variant: Variant | nil, status: Symbol }
+
+    private
+
+    def return_response: (Array[Variant]) -> { message: String, variants: Array[Variant] | nil, status: Symbol }
+
   end
 end

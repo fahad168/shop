@@ -27,12 +27,13 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
   spec.post_install_message = <<-MESSAGE
-  Thank you for installing Shop Gem!
+    Thank you for installing Shop Gem!
 
-  To complete the installation, please run:
+    To complete the installation, please run:
 
-      rails g shop:install
-MESSAGE
+    For Admin Side like creating shop, products, variants and sizes
+        rails g shop:admin
+  MESSAGE
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"

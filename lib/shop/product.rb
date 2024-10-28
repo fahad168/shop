@@ -1,14 +1,14 @@
 module Shop
   class Product
-    attr_reader :user_id, :name, :price, :description, :delivery_fee, :country
+    attr_reader :shop_id, :name, :price, :description, :delivery_fee, :country
 
-    def initialize(user_id)
-      @user_id = user_id
+    def initialize(shop_id)
+      @shop_id = shop_id
     end
 
     # Specific User Products
     def specific_user_products(order, q)
-      products = ::Product.where(user_id: @user_id).order(created_at: order)
+      products = ::Product.where(shop_id: @shop_id).order(created_at: order)
       products = products.where('LOWER(name) ILIKE :query OR LOWER(country) ILIKE :query', query: "%#{q.downcase}%") if q.present?
       if products.present?
         { message: 'Product Found Successfully', products: products, status: :found }
@@ -19,7 +19,7 @@ module Shop
 
     # Creates a new product
     def create(name, price, description, delivery_fee, country)
-      product = ::Product.new(user_id: @user_id, name: , price: ,description: , delivery_fee: , country: )
+      product = ::Product.new(shop_id: @shop_id, name: , price: ,description: , delivery_fee: , country: )
       if product.save
         { message: 'Product Created Successfully', product: product, status: :created }
       else

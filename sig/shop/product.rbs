@@ -5,7 +5,7 @@ module Shop
     attr_reader description: untyped
     attr_reader name: untyped
     attr_reader price: untyped
-    attr_reader user_id: untyped
+    attr_reader shop_id: untyped
 
     @product: untyped
     @product_hash: Hash[untyped, untyped]
