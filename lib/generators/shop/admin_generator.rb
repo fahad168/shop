@@ -9,7 +9,7 @@ module Shop
 
       # Copying migration templates
       def copy_migration
-        migration_template "migrations/create_shop.rb", "db/migrate/create_shops.rb"
+        migration_template "migrations/create_shops.rb", "db/migrate/create_shops.rb"
         migration_template "migrations/create_products.rb", "db/migrate/create_products.rb"
         migration_template "migrations/create_variants.rb", "db/migrate/create_variants.rb"
         migration_template "migrations/create_sizes.rb", "db/migrate/create_sizes.rb"
