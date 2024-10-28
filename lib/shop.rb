@@ -9,7 +9,12 @@ require_relative "shop/product"
 require_relative "shop/size"
 require_relative "shop/variant"
 
-module CartManagement
+module Shop
+
+  class Engine < ::Rails::Engine
+    isolate_namespace Shop
+  end
+
   class Railtie < Rails::Railtie
     initializer "shops.install_migration" do |app|
     end
