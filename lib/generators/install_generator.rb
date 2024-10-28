@@ -1,5 +1,5 @@
-require 'rails/generators'
-require 'rails/generators/migration'
+require "rails/generators"
+require "rails/generators/migration"
 
 module Shop
   module Generators
@@ -17,12 +17,12 @@ module Shop
       end
 
       def copy_models
-        template 'shop.rb', 'app/models/shops.rb'
-        template 'cart.rb', 'app/models/cart.rb'
-        template 'cart_item.rb', 'app/models/cart_item.rb'
-        template 'product.rb', 'app/models/product.rb'
-        template 'variant.rb', 'app/models/variant.rb'
-        template 'size.rb', 'app/models/size.rb'
+        template "shop.rb", "app/models/shops.rb"
+        template "cart.rb", "app/models/cart.rb"
+        template "cart_item.rb", "app/models/cart_item.rb"
+        template "product.rb", "app/models/product.rb"
+        template "variant.rb", "app/models/variant.rb"
+        template "size.rb", "app/models/size.rb"
       end
 
       # def copy_controllers
