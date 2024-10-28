@@ -7,28 +7,33 @@ module Shop
       include Rails::Generators::Migration
       source_root File.expand_path("templates", __dir__)
 
+      # Copying migration templates
       def copy_migration
-        migration_template "shops/migrations/create_shop.rb", "db/migrate/create_shops.rb"
-        migration_template "shops/migrations/create_products.rb", "db/migrate/create_products.rb"
-        migration_template "shops/migrations/create_variants.rb", "db/migrate/create_variants.rb"
-        migration_template "shops/migrations/create_sizes.rb", "db/migrate/create_sizes.rb"
+        migration_template "migrations/create_shop.rb", "db/migrate/create_shops.rb"
+        migration_template "migrations/create_products.rb", "db/migrate/create_products.rb"
+        migration_template "migrations/create_variants.rb", "db/migrate/create_variants.rb"
+        migration_template "migrations/create_sizes.rb", "db/migrate/create_sizes.rb"
       end
 
+      # Copying model templates
       def copy_models
-        template "shops/models/shops.rb", "app/models/shops.rb"
-        template "shops/models/product.rb", "app/models/product.rb"
-        template "shops/models/variant.rb", "app/models/variant.rb"
-        template "shops/models/size.rb", "app/models/size.rb"
+        template "models/shop.rb", "app/models/shop.rb"
+        template "models/product.rb", "app/models/product.rb"
+        template "models/variant.rb", "app/models/variant.rb"
+        template "models/size.rb", "app/models/size.rb"
       end
 
+      # Copying controller templates
       def copy_controllers
-        template "shops/controllers/shops_controller.rb", "app/controllers/shops/shops_controller.rb"
+        template "controllers/shops_controller.rb", "app/controllers/shops/shops_controller.rb"
       end
 
+      # Copying view templates
       def copy_views
-        template "shops/views/index.html.erb.tt", "app/views/shops/shops/index.html.erb"
+        template "views/shops/index.html.erb.tt", "app/views/shops/index.html.erb"
       end
 
+      # Adding routes
       def add_routes
         route <<-RUBY
           namespace :shops do
@@ -37,6 +42,7 @@ module Shop
         RUBY
       end
 
+      # Setting migration numbers
       def self.next_migration_number(path)
         if @prev_migration_nr
           @prev_migration_nr += 1
