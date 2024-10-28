@@ -5,7 +5,7 @@ module Shop
   module Generators
     class AdminGenerator < Rails::Generators::Base
       include Rails::Generators::Migration
-      source_root File.expand_path("../shops/admin/templates", __dir__)
+      source_root File.expand_path("templates", __dir__)
 
       # Copying migration templates
       def copy_migration
