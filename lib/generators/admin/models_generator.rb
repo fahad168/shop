@@ -17,7 +17,7 @@ module Admin
 
       # Copying model templates
       def copy_models
-        template "models/admin.rb", "app/models/admin.rb"
+        template "models/shop.rb", "app/models/shop.rb"
         template "models/product.rb", "app/models/product.rb"
         template "models/variant.rb", "app/models/variant.rb"
         template "models/size.rb", "app/models/size.rb"
@@ -46,7 +46,7 @@ module Admin
       def add_routes
         route <<-RUBY
           # Admin Shop Routes
-          resources :admin, controller: 'admin/shops' do
+          resources :shops, controller: 'admin/shops' do
             collection do
               post :by_code
               post :by_name
