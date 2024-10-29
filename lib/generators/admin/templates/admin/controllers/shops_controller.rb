@@ -43,7 +43,7 @@ class Admin::ShopsController < ShopAdminController
 
   def find_shop
     unless (@shop = Shop.find_by(name: params[:name]))
-      render json: { message: "No shop found with this name" }, status: :not_found
+      render json: { message: "No admin found with this name" }, status: :not_found
     end
   end
 

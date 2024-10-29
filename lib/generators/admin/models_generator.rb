@@ -1,9 +1,9 @@
 require "rails/generators"
 require "rails/generators/migration"
 
-module Shop
+module Admin
   module Generators
-    class AdminGenerator < Rails::Generators::Base
+    class ModelsGenerator < Rails::Generators::Base
       include Rails::Generators::Migration
       source_root File.expand_path("templates/admin", __dir__)
 
@@ -17,7 +17,7 @@ module Shop
 
       # Copying model templates
       def copy_models
-        template "models/shop.rb", "app/models/shop.rb"
+        template "models/admin.rb", "app/models/admin.rb"
         template "models/product.rb", "app/models/product.rb"
         template "models/variant.rb", "app/models/variant.rb"
         template "models/size.rb", "app/models/size.rb"
@@ -46,7 +46,7 @@ module Shop
       def add_routes
         route <<-RUBY
           # Admin Shop Routes
-          resources :shop, controller: 'admin/shops' do
+          resources :admin, controller: 'admin/shops' do
             collection do
               post :by_code
               post :by_name
