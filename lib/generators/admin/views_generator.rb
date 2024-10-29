@@ -31,13 +31,17 @@ module Admin
       # Copying view templates
       def copy_views
         index_path = File.join(__dir__, "templates/admin/views/shops", "index.html.erb")
-        content = File.read(index_path)
+        index_content = File.read(index_path)
         create_file "app/views/admin/shops/index.html.erb", <<~EOF
-          #{content}
+          #{index_content}
         EOF
         template "views/shops/new.html.erb", "app/views/admin/shops/new.html.erb"
         template "views/shared/field_loader.html.erb", "app/views/admin/shared/_field_loader.html.erb"
-        template "views/shared/submit_button.html.erb", "app/views/admin/shared/_submit_button.html.erb"
+        submit_btn_path = File.join(__dir__, "templates/admin/views/shared", "submit_button.html.erb")
+        submit_content = File.read(submit_btn_path)
+        create_file "app/views/admin/shared/_submit_button.html.erb", <<~EOF
+          #{submit_content}
+        EOF
         template "views/shared/success_svg.html.erb", "app/views/admin/shared/_success_svg.html.erb"
         template "views/dashboard/index.html.erb", "app/views/admin/dashboard/index.html.erb"
       end
