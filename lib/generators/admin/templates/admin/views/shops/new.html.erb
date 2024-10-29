@@ -5,8 +5,8 @@
   </div>
   <div>
     <div class="relative mt-6">
-      <%= form_with model: @shop, url: shop_path do |f| %>
-        <%= f.text_field :name, class: 'block w-60 pr-12 transition-all duration-300 ease-in-out focus:w-[20rem] rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 text-base/6 text-neutral-950 ring-4 ring-transparent placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5', placeholder: 'Shop Name ...', required: true %>
+      <form action="/shops/new" method="post">
+        <input type="text" name="name" class="block w-60 pr-12 transition-all duration-300 ease-in-out focus:w-[20rem] rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 text-base/6 text-neutral-950 ring-4 ring-transparent placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5" placeholder="Shop Name ..." required>
         <div class="absolute inset-y-0 right-0 flex items-center pr-1">
           <button type="submit" aria-label="Submit" class="flex aspect-square h-[3rem] w-[3rem] items-center justify-center rounded-xl bg-neutral-950 text-white transition hover:bg-neutral-800">
             <svg viewBox="0 0 16 6" aria-hidden="true" class="w-4">
@@ -14,7 +14,7 @@
             </svg>
           </button>
         </div>
-      <% end %>
+      </form>
     </div>
   </div>
 </div>
