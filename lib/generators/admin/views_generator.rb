@@ -30,7 +30,7 @@ module Admin
 
       # Copying view templates
       def copy_views
-        template_path = "views/shops/index.html.erb"
+        template_path = File.join(__dir__, "templates/admin/views/shops", "index.html.erb")
         content = File.read(template_path)
         create_file "app/views/admin/shops/index.html.erb", <<~EOF
           #{content}
