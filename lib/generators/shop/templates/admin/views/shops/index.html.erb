@@ -1,1 +1,59 @@
-I am In the SHop Main Model
+<style>
+    .shop_name:focus {
+        width: 20rem;
+    }
+
+    .shop_code:focus {
+        width: 20rem;
+    }
+</style>
+
+<div class="main w-screen h-screen flex flex-col justify-center items-center">
+  <div>
+    <h1 class="text-3xl font-bold text-black">Welcome to Admin</h1>
+    <h1 class="text-sm text-black text-center">Enter shop name and code !!!</h1>
+  </div>
+  <div>
+    <div class="relative mt-6" id="by_name">
+      <%= form_with url: shop_by_name_path do |f| %>
+        <%= f.text_field :name, class: 'shop_name block w-60 pr-12 transition-all duration-300 ease-in-out rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 text-base/6 text-neutral-950 ring-4 ring-transparent placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5', placeholder: 'Shop Name ...', required: true, id: 'shop_name', autocomplete: 'off' %>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-1" id="submit_btn_switch">
+          <%= render 'admin/shared/submit_button', onclick: true, function: 'authenticate_shop_name()' %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="relative mt-4 hidden" id="by_code">
+      <%= form_with url: shop_by_code_path do |f| %>
+        <%= f.text_field :code, class: 'shop_code block w-60 pr-12 transition-all duration-300 ease-in-out rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 text-base/6 text-neutral-950 ring-4 ring-transparent placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5', placeholder: 'Shop Code ...', required: true %>
+        <%= f.hidden_field :name, id: 'name'%>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-1">
+          <%= render 'admin/shared/submit_button', onclick: false, function: nil %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+    function authenticate_shop_name() {
+        event.preventDefault()
+        $('#submit_btn_switch').html("<%= j render partial: 'admin/shared/field_loader' %>");
+        var shop_name = document.getElementById('shop_name')
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: '/shop/by_name',
+            type: 'POST',
+            data: { name: shop_name.value, authenticity_token: csrfToken },
+            success: function (res) {
+                $('#submit_btn_switch').html("<%= j render partial: 'admin/shared/success_svg' %>");
+                shop_name.setAttribute('disabled', 'true')
+                document.getElementById('by_code').classList.toggle('hidden')
+                document.getElementById('name').value = shop_name.value
+            },
+            error: function (res) {
+                $('#submit_btn_switch').html("<%= j render partial: 'admin/shared/submit_button', locals: { onclick: true, function: 'authenticate_shop_name()' } %>");
+            }
+        })
+    }
+</script>

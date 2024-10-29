@@ -2,7 +2,7 @@
 
 require_relative "shop/version"
 require "rails/railtie"
-require_relative "generators/shop/install_generator"
+require_relative "generators/shop/user_generator"
 require_relative "generators/shop/admin_generator"
 require_relative "shop/cart"
 require_relative "shop/cart_item"

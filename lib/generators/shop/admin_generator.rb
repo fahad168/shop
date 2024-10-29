@@ -25,24 +25,37 @@ module Shop
 
       # Copying controller templates
       def copy_controllers
+        template "controllers/shop_admin_controller.rb", "app/controllers/shop_admin_controller.rb"
         template "controllers/shops_controller.rb", "app/controllers/admin/shops_controller.rb"
+        template "controllers/dashboard_controller.rb", "app/controllers/admin/dashboard_controller.rb"
+        template "controllers/products_controller.rb", "app/controllers/admin/products_controller.rb"
       end
 
       # Copying view templates
       def copy_views
+        template "views/shop_admin.html.erb", "app/views/layouts/shop_admin.html.erb"
         template "views/shops/index.html.erb", "app/views/admin/shops/index.html.erb"
         template "views/shops/new.html.erb", "app/views/admin/shops/new.html.erb"
+        template "views/shared/field_loader.html.erb", "app/views/admin/shared/_field_loader.html.erb"
+        template "views/shared/submit_button.html.erb", "app/views/admin/shared/_submit_button.html.erb"
+        template "views/shared/success_svg.html.erb", "app/views/admin/shared/_success_svg.html.erb"
+        template "views/dashboard/index.html.erb", "app/views/admin/dashboard/index.html.erb"
       end
 
       # Adding routes
       def add_routes
         route <<-RUBY
-          get "/shop", to: "admin/shops#index"
-          get "/shop/new", to: "admin/shops#new"
-          post "/shop", to: "admin/shops#create"
-          get "/shop/:id/edit", to: "admin/shops#edit"
-          put "/shop/:id/update", to: "admin/shops#update"
-          delete "/shop/:id/destroy", to: "admin/shops#destroy"
+          # Admin Shop Routes
+          resources :shop, controller: 'admin/shops' do
+            collection do
+              post :by_code
+              post :by_name
+            end
+          end
+          namespace :admin do
+            resources :dashboard
+            resources :products
+          end
         RUBY
       end
 

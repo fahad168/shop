@@ -1,6 +1,6 @@
 module Shop
   module Generators
-    class InstallGenerator
+    class UserGenerator
       @prev_migration_nr: untyped
     end
   end
