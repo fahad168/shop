@@ -23,59 +23,6 @@ module Admin
         template "models/size.rb", "app/models/size.rb"
       end
 
-      # Copying controller templates
-      def copy_controllers
-        template "controllers/shop_admin_controller.rb", "app/controllers/shop_admin_controller.rb"
-        template "controllers/shops_controller.rb", "app/controllers/admin/shops_controller.rb"
-        template "controllers/dashboard_controller.rb", "app/controllers/admin/dashboard_controller.rb"
-        template "controllers/products_controller.rb", "app/controllers/admin/products_controller.rb"
-      end
-
-      def create_layout_file
-        create_file "app/views/layouts/shop_admin.html.erb", <<~EOF
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <title>Admin Shop</title>
-              <meta name="viewport" content="width=device-width,initial-scale=1">
-              <script src="https://cdn.tailwindcss.com"></script>
-              <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-            </head>
-            <body>
-              <%= yield %>
-            </body>
-          </html>
-        EOF
-      end
-
-      # Copying view templates
-      def copy_views
-        # template "views/shop_admin.html.erb", "app/views/layouts/shop_admin.html.erb"
-        template "views/shops/index.html.erb", "app/views/admin/shops/index.html.erb"
-        template "views/shops/new.html.erb", "app/views/admin/shops/new.html.erb"
-        template "views/shared/field_loader.html.erb", "app/views/admin/shared/_field_loader.html.erb"
-        template "views/shared/submit_button.html.erb", "app/views/admin/shared/_submit_button.html.erb"
-        template "views/shared/success_svg.html.erb", "app/views/admin/shared/_success_svg.html.erb"
-        template "views/dashboard/index.html.erb", "app/views/admin/dashboard/index.html.erb"
-      end
-
-      # Adding routes
-      def add_routes
-        route <<-RUBY
-          # Admin Shop Routes
-          resources :shops, controller: 'admin/shops' do
-            collection do
-              post :by_code
-              post :by_name
-            end
-          end
-          namespace :admin do
-            resources :dashboard
-            resources :products
-          end
-        RUBY
-      end
-
       # Setting migration numbers
       def self.next_migration_number(path)
         if @prev_migration_nr
