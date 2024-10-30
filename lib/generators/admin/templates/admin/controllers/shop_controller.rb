@@ -1,4 +1,4 @@
-class Admin::ShopsController < ShopAdminController
+class Admin::ShopController < ShopAdminController
   before_action :check_cookies
   before_action :find_shop, only: %w[by_name by_code]
 
@@ -49,7 +49,7 @@ class Admin::ShopsController < ShopAdminController
 
   def check_cookies
     if cookies["shop_code"].present?
-      redirect_to admin_dashboard_path
+      redirect_to admin_dashboard_index_path
     end
   end
 end

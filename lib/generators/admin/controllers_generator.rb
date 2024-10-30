@@ -10,7 +10,7 @@ module Admin
       # Copying controller templates
       def copy_controllers
         template "controllers/shop_admin_controller.rb", "app/controllers/shop_admin_controller.rb"
-        template "controllers/shops_controller.rb", "app/controllers/admin/shops_controller.rb"
+        template "controllers/shop_controller.rb", "app/controllers/admin/shop_controller.rb"
         template "controllers/dashboard_controller.rb", "app/controllers/admin/dashboard_controller.rb"
         template "controllers/products_controller.rb", "app/controllers/admin/products_controller.rb"
       end
@@ -19,7 +19,7 @@ module Admin
       def add_routes
         route <<-RUBY
           # Admin Shop Routes
-          resources :shops, controller: 'admin/shops' do
+          resources :shop, controller: 'admin/shop' do
             collection do
               post :by_code
               post :by_name
