@@ -1,0 +1,11 @@
+<% if flash[:alert].present? %>
+  <script>
+      toastr.error('<%= flash[:alert].first %>')
+  </script>
+<% end %>
+
+<% if flash[:notice].present? %>
+  <script>
+      toastr.success('<%= flash[:notice] %>')
+  </script>
+<% end %>

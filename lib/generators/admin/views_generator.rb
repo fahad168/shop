@@ -20,8 +20,11 @@ module Admin
               <meta name="viewport" content="width=device-width,initial-scale=1">
               <script src="https://cdn.tailwindcss.com"></script>
               <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
             </head>
             <body>
+              <%= render 'admin/shared/toastr' %>
               <%= yield %>
             </body>
           </html>
@@ -35,7 +38,11 @@ module Admin
         create_file "app/views/admin/shop/index.html.erb", <<~EOF
           #{index_content}
         EOF
-        template "views/shop/new.html.erb", "app/views/admin/shop/new.html.erb"
+        new_shop_path = File.join(__dir__, "templates/admin/views/shop", "new.html.erb")
+        new_shop_content = File.read(new_shop_path)
+        create_file "app/views/admin/shop/new.html.erb", <<~EOF
+          #{new_shop_content}
+        EOF
         template "views/shared/field_loader.html.erb", "app/views/admin/shared/_field_loader.html.erb"
         submit_btn_path = File.join(__dir__, "templates/admin/views/shared", "submit_button.html.erb")
         submit_content = File.read(submit_btn_path)
@@ -43,6 +50,11 @@ module Admin
           #{submit_content}
         EOF
         template "views/shared/success_svg.html.erb", "app/views/admin/shared/_success_svg.html.erb"
+        toastr_path = File.join(__dir__, "templates/admin/views/shared", "toastr.html.erb")
+        toastr_content = File.read(toastr_path)
+        create_file "app/views/admin/shared/_toastr.html.erb", <<~EOF
+          #{toastr_content}
+        EOF
         template "views/dashboard/index.html.erb", "app/views/admin/dashboard/index.html.erb"
       end
     end

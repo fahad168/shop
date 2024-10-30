@@ -15,7 +15,7 @@
   </div>
   <div>
     <div class="relative mt-6" id="by_name">
-      <%= form_with url: shop_by_name_path do |f| %>
+      <%= form_with url: by_name_shop_index_path do |f| %>
         <%= f.text_field :name, class: 'shop_name block w-60 pr-12 transition-all duration-300 ease-in-out rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 text-base/6 text-neutral-950 ring-4 ring-transparent placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5', placeholder: 'Shop Name ...', required: true, id: 'shop_name', autocomplete: 'off' %>
         <div class="absolute inset-y-0 right-0 flex items-center pr-1" id="submit_btn_switch">
           <%= render 'admin/shared/submit_button', onclick: true, function: 'authenticate_shop_name()' %>
@@ -24,7 +24,7 @@
     </div>
 
     <div class="relative mt-4 hidden" id="by_code">
-      <%= form_with url: shop_by_code_path do |f| %>
+      <%= form_with url: by_code_shop_index_path do |f| %>
         <%= f.text_field :code, class: 'shop_code block w-60 pr-12 transition-all duration-300 ease-in-out rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 text-base/6 text-neutral-950 ring-4 ring-transparent placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5', placeholder: 'Shop Code ...', required: true %>
         <%= f.hidden_field :name, id: 'name'%>
         <div class="absolute inset-y-0 right-0 flex items-center pr-1">

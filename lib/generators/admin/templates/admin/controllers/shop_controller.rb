@@ -9,13 +9,13 @@ class Admin::ShopController < ShopAdminController
   end
 
   def create
-    @shop = Shop.new(name: params[:shop][:name], code: "SH#{SecureRandom.hex(5)}")
+    @shop = Shop.new(name: params[:name], code: "SH#{SecureRandom.hex(5)}")
     if @shop.save
       flash[:notice] = "Shop Created Successfully"
-      redirect_to shop_path
+      redirect_to shop_index_path
     else
       flash[:alert] = @shop.errors.full_messages
-      render :new
+      redirect_to new_shop_path
     end
   end
 
@@ -35,7 +35,7 @@ class Admin::ShopController < ShopAdminController
       cookies.permanent["shop_code"] = @shop.code
       redirect_to admin_dashboard_path, notice: "Shop Authenticated Successfully"
     else
-      redirect_to shop_path, notice: "Shop code is incorrect"
+      redirect_to shop_index_path, notice: "Shop code is incorrect"
     end
   end
 
