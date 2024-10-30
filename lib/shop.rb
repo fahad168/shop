@@ -14,7 +14,7 @@ require_relative "shop/variant"
 
 module Shop
   class Railtie < Rails::Railtie
-    initializer "shops.install_migration" do |app|
+    initializer "shop.install_migration" do |app|
       app.config.autoload_paths << File.expand_path("../generators", __dir__)
     end
   end

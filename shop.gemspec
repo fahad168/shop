@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
-  spec.files = Dir["lib/shops/**/*.rb", "sig/**/*", "spec/**/*", "lib/generators/user_generator.rb",
+  spec.files = Dir["lib/shop/**/*.rb", "sig/**/*", "spec/**/*", "lib/generators/user_generator.rb",
                    "lib/generators/models_generator.rb", "lib/generators/controllers_generator.rb",
                    "lib/generators/views_generator.rb"]
   spec.bindir = "exe"
