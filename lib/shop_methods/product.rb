@@ -19,8 +19,7 @@ module ShopMethods
 
     # Creates a new product
     def create(params)
-      product_attributes = product_params(params).merge(country: params[:product][:country])
-      if (product = ::Product.create(product_attributes))
+      if (product = ::Product.create(name: params[:name], price: params[:price], description: params[:description], delivery_fee: params[:delivery_fee], shop_id: @shop_id, country: params[:product][:country]))
         variant_params(product, params)
         { message: 'Product Created Successfully', product: product, status: :created }
       else
