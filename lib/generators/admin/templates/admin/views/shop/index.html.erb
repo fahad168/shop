@@ -52,6 +52,7 @@
                 document.getElementById('name').value = shop_name.value
             },
             error: function (res) {
+                toastr.error('Shop not found with this name !!!')
                 $('#submit_btn_switch').html("<%= j render partial: 'admin/shared/submit_button', locals: { onclick: true, function: 'authenticate_shop_name()' } %>");
             }
         })

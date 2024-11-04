@@ -1,0 +1,241 @@
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
+  <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
+    <div>
+      <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
+        <svg class="w-3 h-3 text-gray-500 dark:text-gray-400 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z"/>
+        </svg>
+        Last 30 days
+        <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+        </svg>
+      </button>
+      <!-- Dropdown menu -->
+      <div id="dropdownRadio" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px);">
+        <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioButton">
+          <li>
+            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+              <input id="filter-radio-example-1" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <label for="filter-radio-example-1" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last day</label>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+              <input checked="" id="filter-radio-example-2" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <label for="filter-radio-example-2" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last 7 days</label>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+              <input id="filter-radio-example-3" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <label for="filter-radio-example-3" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last 30 days</label>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+              <input id="filter-radio-example-4" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <label for="filter-radio-example-4" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last month</label>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+              <input id="filter-radio-example-5" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              <label for="filter-radio-example-5" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last year</label>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="flex gap-3">
+      <label for="table-search" class="sr-only">Search</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
+          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+        </div>
+        <input type="text" autocomplete="off" id="table-search" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-[#FF8717] focus:border-[#FF8717] outline-none dark:outline-none dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:border-none" placeholder="Search for items">
+      </div>
+      <input class="hidden" value="" id="product_ids">
+      <button onclick="open_multiple_product_modal()" id="destroy_button" class="px-4 py-2 rounded-lg bg-red-500 text-white whitespace-nowrap text-xs font-medium hidden"></button>
+      <a data-turbo="false" href="/shop/admin/products/new" title="Add New" class="group cursor-pointer outline-none hover:opacity-75">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 24 24" class="stroke-[#FF8717] fill-none group-active:duration-0 duration-300">
+          <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke-width="1.5"></path>
+          <path d="M8 12H16" stroke-width="1.5"></path>
+          <path d="M12 16V8" stroke-width="1.5"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr>
+      <th scope="col" class="p-4">
+        <div class="flex items-center">
+          <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          <label for="checkbox-all-search" class="sr-only">checkbox</label>
+        </div>
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Product name
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Description
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Price
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Delivery Fee
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Action
+      </th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @products.each do |product| %>
+      <tr class="cursor-pointer bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+        <td class="w-4 p-4">
+          <div class="flex items-center">
+            <input onclick="check_select_ids(this, '<%= product.id %>')" id="checkbox_<%= product.id %>" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <label for="checkbox_<%= product.id %>" class="sr-only">checkbox</label>
+          </div>
+        </td>
+        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          <%= product.name %>
+        </td>
+        <td class="px-6 py-4 w-[5rem] truncate">
+          <%= product.description %>
+        </td>
+        <td class="px-6 py-4">
+          $<%= product.price %>
+        </td>
+        <td class="px-6 py-4">
+          $<%= product.delivery_fee %>
+        </td>
+        <td class="px-6 py-4 flex gap-1">
+          <button onclick="open_product_delete_modal('<%= product.id %>')">
+            <svg class="cursor_pointer hover:opacity-75" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 21.5C6.45 21.5 5.97933 21.3043 5.588 20.913C5.19667 20.5217 5.00067 20.0507 5 19.5V6.5H4V4.5H9V3.5H15V4.5H20V6.5H19V19.5C19 20.05 18.8043 20.521 18.413 20.913C18.0217 21.305 17.5507 21.5007 17 21.5H7ZM9 17.5H11V8.5H9V17.5ZM13 17.5H15V8.5H13V17.5Z" fill="red"/>
+            </svg>
+          </button>
+          <a href="#">
+            <svg class="cursor_pointer hover:opacity-75" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.988 2.51172L21.988 5.51172L19.701 7.79972L16.701 4.79972L18.988 2.51172ZM8 16.4997H11L18.287 9.21272L15.287 6.21272L8 13.4997V16.4997Z" fill="#FF8717"/>
+              <path d="M19 19.5H8.158C8.132 19.5 8.105 19.51 8.079 19.51C8.046 19.51 8.013 19.501 7.979 19.5H5V5.5H11.847L13.847 3.5H5C3.897 3.5 3 4.396 3 5.5V19.5C3 20.604 3.897 21.5 5 21.5H19C19.5304 21.5 20.0391 21.2893 20.4142 20.9142C20.7893 20.5391 21 20.0304 21 19.5V10.832L19 12.832V19.5Z" fill="#FF8717"/>
+            </svg>
+          </a>
+          <a href="#">
+            <svg class="cursor_pointer hover:opacity-75" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5.5C6.612 5.5 2 10.836 2 12.5C2 14.242 5.546 19.5 12 19.5C18.454 19.5 22 14.242 22 12.5C22 10.836 17.388 5.5 12 5.5ZM12 15.5C11.4067 15.5 10.8266 15.3241 10.3333 14.9944C9.83994 14.6648 9.45542 14.1962 9.22836 13.6481C9.0013 13.0999 8.94189 12.4967 9.05764 11.9147C9.1734 11.3328 9.45912 10.7982 9.87868 10.3787C10.2982 9.95912 10.8328 9.6734 11.4147 9.55764C11.9967 9.44189 12.5999 9.5013 13.1481 9.72836C13.6962 9.95542 14.1648 10.3399 14.4944 10.8333C14.8241 11.3266 15 11.9067 15 12.5C15 13.2956 14.6839 14.0587 14.1213 14.6213C13.5587 15.1839 12.7956 15.5 12 15.5Z" fill="#FF8717"/>
+            </svg>
+          </a>
+        </td>
+        <td>
+          <button onclick="document.getElementById('variant-<%= product.id %>').classList.toggle('hidden');document.getElementById('arrow-<%= product.id %>').classList.toggle('rotate-180')" class="hover:opacity-75 transition-all ease-in duration-250 mt-2" id="arrow-<%= product.id %>">
+            <svg fill="#FF8717" width="20" height="30" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-42.9 -42.9 415.80 415.80" xml:space="preserve" transform="rotate(90)" stroke="#FF8717" stroke-width="10.23"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path id="XMLID_222_" d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001 c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213 C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606 C255,161.018,253.42,157.202,250.606,154.389z"></path> </g></svg>
+          </button>
+        </td>
+      </tr>
+      <tr id="variant-<%= product.id %>" class="hidden">
+        <td colspan="7" class="p-0">
+          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th class="px-6 py-3"></th>
+              <th class="px-6 py-3">Variant name</th>
+              <th class="px-6 py-3">Color</th>
+              <th class="px-6 py-3">Size</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% product.variants.each do |variant| %>
+              <tr>
+                <td class="px-6 py-4"></td>
+                <td class="px-6 py-4"><%= variant.name %></td>
+                <td class="px-6 py-4">
+                  <div class="w-8 h-8 rounded-full bg-[<%= variant.color %>]"></div>
+                </td>
+                <td class="px-6 py-4">
+                  <% variant.sizes&.each do |size| %>
+                    <p><%= size.name %> (<%= size.in_stock %>)</p>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="hidden fixed inset-0 bg-black/60 transition-all duration-300" style="z-index: 100" id="product_overlay"></div>
+<div id="product-delete-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full" style="z-index: 110">
+  <div class="relative p-4 w-full max-w-md max-h-full">
+    <div class="relative bg-white rounded-lg shadow">
+      <button type="button"
+              class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+              onclick="close_product_delete_modal()">
+        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+        <span class="sr-only">Close modal</span>
+      </button>
+      <div class="p-4 md:p-5 text-center">
+        <svg class="mx-auto mt-[26px] mb-4 size-9" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 3.5C17.5388 3.5 14.1554 4.52636 11.2775 6.44928C8.39967 8.37221 6.15665 11.1053 4.83212 14.303C3.50758 17.5007 3.16102 21.0194 3.83627 24.4141C4.51151 27.8087 6.17822 30.9269 8.62564 33.3744C11.0731 35.8218 14.1913 37.4885 17.5859 38.1637C20.9806 38.839 24.4993 38.4924 27.697 37.1679C30.8947 35.8433 33.6278 33.6003 35.5507 30.7225C37.4736 27.8446 38.5 24.4612 38.5 21C38.4949 16.3603 36.6495 11.912 33.3687 8.63126C30.088 5.35048 25.6397 3.5051 21 3.5ZM21 29.75C20.6539 29.75 20.3155 29.6474 20.0278 29.4551C19.74 29.2628 19.5157 28.9895 19.3832 28.6697C19.2508 28.3499 19.2161 27.9981 19.2836 27.6586C19.3512 27.3191 19.5178 27.0073 19.7626 26.7626C20.0073 26.5178 20.3191 26.3511 20.6586 26.2836C20.9981 26.2161 21.3499 26.2508 21.6697 26.3832C21.9895 26.5157 22.2628 26.74 22.4551 27.0277C22.6474 27.3155 22.75 27.6539 22.75 28C22.75 28.4641 22.5656 28.9092 22.2374 29.2374C21.9093 29.5656 21.4641 29.75 21 29.75ZM22.75 22.75C22.75 23.2141 22.5656 23.6592 22.2374 23.9874C21.9093 24.3156 21.4641 24.5 21 24.5C20.5359 24.5 20.0908 24.3156 19.7626 23.9874C19.4344 23.6592 19.25 23.2141 19.25 22.75V14C19.25 13.5359 19.4344 13.0907 19.7626 12.7626C20.0908 12.4344 20.5359 12.25 21 12.25C21.4641 12.25 21.9093 12.4344 22.2374 12.7626C22.5656 13.0907 22.75 13.5359 22.75 14V22.75Z" fill="#9CA3AF"/>
+        </svg>
+        <h3 class="mb-5 text-base font-bold text-[#000000] text-center mx-8" id="modal_text">Are you sure you want to Delete this Product?</h3>
+        <%= link_to "", data: { turbo_method: :delete }, id: 'product_destroy', class: 'text-[#1F2A37] hover:bg-[red] hover:text-white  border border-gray-200  font-medium rounded-lg text-sm inline-flex items-center px-[23px] py-2 text-center' do %>
+          Yes
+        <% end %>
+        <button onclick="close_product_delete_modal()" type="button" class="py-2 px-3 ms-3 text-sm font-medium text-[#1F2A37] bg-white rounded-lg border border-gray-200 hover:bg-[#FF8717] hover:text-white">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    function close_product_delete_modal() {
+        document.getElementById('product-delete-modal').style.display = "none"
+        document.getElementById('product_overlay').style.display = "none"
+    }
+
+    function open_product_delete_modal(id) {
+        document.getElementById('product-delete-modal').style.display = "flex"
+        document.getElementById('product_overlay').style.display = "block"
+        document.getElementById('modal_text').innerText = 'Are you sure you want to Delete this Product?'
+        document.getElementById('product_destroy').href = `/shop/admin/products/${id}`
+    }
+
+    function check_select_ids(checkbox, id) {
+        var input = document.getElementById('product_ids')
+        var button = document.getElementById('destroy_button')
+        var ids_array = JSON.parse(input.value || "[]")
+        if(checkbox.checked) {
+            ids_array.push(id)
+        } else {
+            ids_array = ids_array.filter(item => item !== id);
+        }
+        if (ids_array.length === 0) {
+            button.classList.add('hidden')
+        } else {
+            button.classList.remove('hidden')
+            button.innerText = `${ids_array.length} Delete`
+        }
+        input.value = JSON.stringify(ids_array)
+    }
+
+    function open_multiple_product_modal() {
+        document.getElementById('product-delete-modal').style.display = "flex"
+        document.getElementById('product_overlay').style.display = "block"
+        var input = document.getElementById('product_ids')
+        document.getElementById('modal_text').innerText = 'Are you sure you want to Delete these Products?'
+        document.getElementById('product_destroy').href = `/shop/admin/products/multiple_destroy?ids=${input.value}`
+    }
+</script>

@@ -43,7 +43,10 @@ Gem::Specification.new do |spec|
   MESSAGE
 
   # Uncomment to register a new dependency of your gem
-  # spec.add_dependency "example-gem", "~> 1.0"
+  spec.add_dependency "breadcrumbs_on_rails"
+  spec.add_dependency "country_select"
+  spec.add_dependency "color"
+  spec.add_dependency "color_name"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html

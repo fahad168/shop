@@ -1,13 +1,53 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Admin Shop</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  </head>
-
-  <body>
+<html class="">
+<head>
+  <title>Admin Shop</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.0.0/dist/tailwind.min.css" rel="stylesheet">
+  <script>
+      tailwind.config = {
+          content: ["./*.html"],
+          theme: {
+              extend: {
+                  colors: {
+                      primary: {
+                          blue: {
+                              light: "#00ccdd"
+                          }
+                      }
+                  }
+              }
+          },
+          darkMode: "class"
+      };
+  </script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+  <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
+  <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
+</head>
+<body class="bg-white dark:bg-gray-800">
+<%= render 'shop/admin/shared/toastr' %>
+<% if @current_shop.present? %>
+  <%= render 'shop/admin/shared/sidebar' %>
+  <div class="p-4 sm:ml-64">
+    <div class="mt-[3rem]">
+      <%= render_breadcrumbs %>
+    </div>
     <%= yield %>
-  </body>
+  </div>
+<% else %>
+  <%= yield %>
+<% end %>
+</body>
 </html>

@@ -1,0 +1,77 @@
+<!--<style>-->
+<!--    @media (prefers-color-scheme: dark) {-->
+<!--        .chosen-single {-->
+<!--            border: none !important;-->
+<!--            -webkit-box-shadow: none !important;-->
+<!--            box-shadow: none !important;-->
+<!--        }-->
+
+<!--        /*.chosen-container-single {*/-->
+<!--        /*    background-color: #2d3748 !important;*/-->
+<!--        /*}*/-->
+<!--    }-->
+<!--</style>-->
+
+<div class="max-w-[662px] mx-auto">
+  <p class="text-[red] text-md mb-6" id="variant_error"></p>
+  <div class="flex flex-col sm:flex-row gap-2 mb-6">
+    <div class="w-full">
+      <label class="block mb-2 text-sm font-normal text-[#000000] dark:text-white ">Product Title  <span class="text-[#FF8717]">*</span></label>
+      <input value="<%= product.present? ? product.name : '' %>" name="name" class=" border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="Enter" required />
+    </div>
+    <div class="w-full">
+      <label class="block mb-2 text-sm font-normal text-[#000000] dark:text-white">Price  <span class="text-[#FF8717]">*</span></label>
+      <input value="<%= product.present? ? product.price : '' %>" type="number" name="price" class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black  block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="Enter" required />
+    </div>
+  </div>
+  <div class="mb-6">
+    <label class="block mb-2 text-sm font-medium text-[#000000] dark:text-white">Description  <span class="text-[#FF8717]">*</span></label>
+    <textarea name="description" required rows="4" class="block p-2.5 w-full text-sm text-[#000000] h-[89px] rounded-lg border border-[#D1D5DB] focus:outline-transparent focus:border-gray-300 focus:ring-0 !outline-none dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none"><%= product.present? ? product.description : '' %></textarea>
+  </div>
+  <div class="grid grid-cols-2 gap-2 mb-6">
+    <div class="mb-6">
+      <label class="block mb-2 text-sm font-medium text-[#000000] dark:text-white">Delivery Fee  <span class="text-[#FF8717]">*</span></label>
+      <input type="number" value="<%= product.present? ? product.delivery_fee : '' %>" name="delivery_fee" required class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="Enter">
+    </div>
+    <div class="mb-6 w-full">
+      <label class="block mb-2 text-sm font-medium text-[#000000] dark:text-white">Country  <span class="text-[#FF8717]">*</span></label>
+      <%= country_select_with_flags(:product, :country, { selected: product.present? ? product.country : nil }, { placeholder: 'Select Countries', required: true }) %>
+    </div>
+  </div>
+  <div class="flex flex-col" id="variants">
+    <% if product.present? %>
+      <% product.variants.each_with_index do |variant, index| %>
+        <%= render 'variant_edit', variant: variant, count: index + 1, f: f %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="my-6">
+    <button type="button" class="px-[14px] py-2 flex gap-2 rounded-lg border border-[#000000] dark:border-white text-xs text-black dark:text-white font-medium" onclick="show_variants_fields()">
+      <svg class="size-4 cursor-pointer stroke-[#1F2A37] dark:stroke-white fill-[#E74A39] dark:fill-white" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 12.1836H5H12Z"/>
+        <path d="M12 5.18359V12.1836M12 12.1836V19.1836M12 12.1836H19M12 12.1836H5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Add Variant
+    </button>
+  </div>
+  <div class="flex items-end justify-end gap-2">
+    <a data-turbo="false" href="/shop/admin/products" type="button" class="px-[22px] py-2 flex rounded-lg border border-[#000000] dark:border-white dark:text-white text-xs font-medium hover:border-transparent hover:bg-[#FF8717] hover:text-white transition-all">Cancel</a>
+    <button id="product_submit" type="submit" class="px-[22px] py-2 h-[34px] flex rounded-lg border border-black hover:border-transparent dark:border-white dark:text-white text-xs font-medium hover:bg-[#FF8717] hover:text-white transition-all">Submit</button>
+  </div>
+</div>
+<script>
+    function createFileInput(count) {
+        const input = `<%= f.file_field :variant, class: 'dropzone_file hidden', multiple: true, accept: "image/jpeg, image/png, image/jpg" %>`
+        const fileInput = $(`#file_input_${count}`)
+        fileInput.html(input);
+        var dropzone = $('.dropzone_file')[0]
+        dropzone.setAttribute('id', `dropzone-file-${count}`)
+        dropzone.removeAttribute('name')
+        dropzone.setAttribute('name', `variant${count}[variant_images][]`)
+        dropzone.setAttribute('onchange', `show_selected_images("${count}", event)`)
+        dropzone.classList.remove('dropzone_file')
+        fileInput.html(dropzone);
+    }
+</script>
+
+<%= javascript_include_tag('shop') %>

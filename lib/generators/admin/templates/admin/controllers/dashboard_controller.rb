@@ -1,4 +1,4 @@
-class Admin::DashboardController < ShopAdminController
+class Shop::Admin::DashboardController < ShopAdminController
   before_action :authorize_shop
 
   def index; end

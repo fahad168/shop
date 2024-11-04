@@ -1,4 +1,4 @@
-class Admin::ShopController < ShopAdminController
+class Shop::Admin::ShopController < ShopAdminController
   before_action :check_cookies
   before_action :find_shop, only: %w[by_name by_code]
 
@@ -33,7 +33,7 @@ class Admin::ShopController < ShopAdminController
   def by_code
     if params[:code] == @shop.code
       cookies.permanent["shop_code"] = @shop.code
-      redirect_to admin_dashboard_path, notice: "Shop Authenticated Successfully"
+      redirect_to shop_admin_dashboard_index_path, notice: "Shop Authenticated Successfully"
     else
       redirect_to shop_index_path, notice: "Shop code is incorrect"
     end
@@ -49,7 +49,7 @@ class Admin::ShopController < ShopAdminController
 
   def check_cookies
     if cookies["shop_code"].present?
-      redirect_to admin_dashboard_index_path
+      redirect_to shop_admin_dashboard_index_path
     end
   end
 end
