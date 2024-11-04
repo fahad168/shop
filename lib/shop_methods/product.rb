@@ -50,12 +50,6 @@ module ShopMethods
     end
   end
 
-  private
-
-  def product_params(params)
-    params.permit(:name, :price, :description, :delivery_fee).merge(shop_id: @shop_id)
-  end
-
   def variant_params(product, params)
     variant_params = params.select { |key, _| key.to_s.start_with?('variant') }
     variant_params.each_value do |variant_param|
