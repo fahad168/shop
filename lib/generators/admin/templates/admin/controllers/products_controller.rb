@@ -3,8 +3,8 @@ class Shop::Admin::ProductsController < ShopAdminController
   before_action :authorize_shop
 
   def index
-    response = ShopMethods::Product.new(@current_shop.id).specific_shop_products(:desc, per_page, params[:q], params[:filter])
-    @products = response[:products]
+    response = ShopMethods::Product.new(@current_shop.id).specific_shop_products(:desc, params[:q], params[:filter])
+    @products = response[:products].paginate(per_page: 2, page: params[:page])
   end
 
   def new
