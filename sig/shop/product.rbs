@@ -16,10 +16,4 @@ module ShopMethods
     def update: (Hash[Symbol, Integer | String | Float], Integer) -> { message: String, product: Product | nil, status: Symbol }
     def delete_product: (Integer) -> { message: String, product: Product | nil, status: Symbol }
   end
-
-  private
-
-  def product_params: -> untyped
-
-  def variant_params: -> untyped
 end
