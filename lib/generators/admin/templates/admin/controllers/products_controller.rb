@@ -3,7 +3,7 @@ class Shop::Admin::ProductsController < ShopAdminController
   before_action :authorize_shop
 
   def index
-    response = ShopMethods::Product.new(@current_shop.id).specific_shop_products(:desc, nil)
+    response = ShopMethods::Product.new(@current_shop.id).specific_shop_products(:desc, per_page, params[:q], params[:filter])
     @products = response[:products]
   end
 
