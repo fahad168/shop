@@ -7,7 +7,7 @@ module ShopMethods
     end
 
     # Specific User Products
-    def specific_user_products(order, q)
+    def specific_shop_products(order, q)
       products = ::Product.where(shop_id: @shop_id).order(created_at: order)
       products = products.where('LOWER(name) ILIKE :query OR LOWER(country) ILIKE :query', query: "%#{q.downcase}%") if q.present?
       if products.present?
@@ -18,9 +18,9 @@ module ShopMethods
     end
 
     # Creates a new product
-    def create(name, price, description, delivery_fee, country)
-      product = ::Product.new(shop_id: @shop_id, name: , price: ,description: , delivery_fee: , country: )
-      if product.save
+    def create(params)
+      if (product = ::Product.create(product_params.merge(country: params[:product][:country])))
+        variant_params(product, params)
         { message: 'Product Created Successfully', product: product, status: :created }
       else
         { message: product.errors.full_messages, product: nil, status: :unprocessable_entity }
@@ -39,13 +39,37 @@ module ShopMethods
     end
 
     # Deletes the product
-    def delete(product_id)
+    def delete_product(product_id)
       return { message: 'Product not found', product: nil, status: :not_found } unless (product = ::Product.find_by(id: product_id))
 
       if product.destroy
         { message: 'Product Deleted Successfully', product: nil, status: :deleted }
       else
         { message: product.errors.full_messages, product: nil, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  private
+
+  def product_params
+    params.permit(:name, :price, :description, :delivery_fee).merge(shop_id: @shop_id)
+  end
+
+  def variant_params(product, params)
+    variant_params = params.select { |key, _| key.to_s.start_with?('variant') }
+    variant_params.each_value do |variant_param|
+      variant = product.variants.create(color: variant_param[:color], name: variant_param[:name])
+      if variant_param[:size].present?
+        variant_param[:size].each_with_index do |size, index|
+          variant.sizes.create(name: size, in_stock: variant_param[:quantity][index])
+        end
+      end
+      if variant_param[:variant_images].present?
+        variant_param[:variant_images].each do |image|
+          variant_image = Image.create(variant_id: variant.id)
+          variant_image.image.attach(image)
+        end
       end
     end
   end

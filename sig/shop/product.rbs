@@ -1,4 +1,4 @@
-module Shop
+module ShopMethods
   class Product
     attr_reader country: untyped
     attr_reader delivery_fee: untyped
@@ -12,8 +12,14 @@ module Shop
 
     def initialize: (Integer) -> untyped
     def create: (String, Float, String | nil, Float | nil, String | nil) -> { message: String, product: Product | nil, status: Symbol }
-    def specific_user_products: ((:asc | :desc), String | nil) -> { message: String, products: Array[Product] | nil, status: Symbol }
+    def specific_shop_products: ((:asc | :desc), String | nil) -> { message: String, products: Array[Product] | nil, status: Symbol }
     def update: (Hash[Symbol, Integer | String | Float], Integer) -> { message: String, product: Product | nil, status: Symbol }
-    def delete: (Integer) -> { message: String, product: Product | nil, status: Symbol }
+    def delete_product: (Integer) -> { message: String, product: Product | nil, status: Symbol }
   end
+
+  private
+
+  def product_params: -> untyped
+
+  def variant_params: -> untyped
 end
