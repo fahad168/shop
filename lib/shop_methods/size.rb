@@ -1,4 +1,4 @@
-module Shop
+module ShopMethods
   class Size
     attr_reader :variant_id,  :name, :short_form, :quantity
 

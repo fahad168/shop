@@ -1,4 +1,4 @@
-module Shop
+module ShopMethods
   class Cart
     attr_reader :user_id
 

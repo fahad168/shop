@@ -1,4 +1,4 @@
-module Shop
+module ShopMethods
   class Product
     attr_reader :shop_id, :name, :price, :description, :delivery_fee, :country
 
