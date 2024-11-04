@@ -172,6 +172,10 @@
   </table>
 </div>
 
+<div class="pagination-container text-center mb-6 mx-5 md:mx-0 mt-5">
+  <%= will_paginate @products %>
+</div>
+
 <div class="hidden fixed inset-0 bg-black/60 transition-all duration-300" style="z-index: 100" id="product_overlay"></div>
 <div id="product-delete-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full" style="z-index: 110">
   <div class="relative p-4 w-full max-w-md max-h-full">

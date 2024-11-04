@@ -7,7 +7,7 @@ module ShopMethods
     end
 
     # Specific User Products
-    def specific_shop_products(order,  per_page, q, filter)
+    def specific_shop_products(order,  per_page, q, filter, page)
       products = ::Product.where(shop_id: @shop_id).order(created_at: order)
       products = products.where('LOWER(name) ILIKE :query OR LOWER(country) ILIKE :query', query: "%#{q.downcase}%") if q.present?
       products = if filter.present?
@@ -25,7 +25,7 @@ module ShopMethods
                     end
                   end
       if products.present?
-        { message: 'Product Found Successfully', products: products.paginate(per_page: per_page, page: params[:page]), status: :found }
+        { message: 'Product Found Successfully', products: products.paginate(per_page: per_page, page: page), status: :found }
       else
         { message: 'No Product Found For This User', products: [], status: :not_found }
       end
