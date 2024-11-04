@@ -10,6 +10,15 @@ gem "rake", "~> 13.0"
 
 gem "rubocop", "~> 1.21"
 
+gem "breadcrumbs_on_rails"
+
+gem "country_select"
+
+gem "color"
+
+gem "color_name"
+
+
 group :development do
   gem 'rspec-rails'
 end
