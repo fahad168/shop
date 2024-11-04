@@ -19,7 +19,7 @@ module ShopMethods
 
     # Creates a new product
     def create(params)
-      if (product = ::Product.create(product_params.merge(country: params[:product][:country])))
+      if (product = ::Product.create(product_params(params).merge(country: params[:product][:country])))
         variant_params(product, params)
         { message: 'Product Created Successfully', product: product, status: :created }
       else
@@ -52,7 +52,7 @@ module ShopMethods
 
   private
 
-  def product_params
+  def product_params(params)
     params.permit(:name, :price, :description, :delivery_fee).merge(shop_id: @shop_id)
   end
 
