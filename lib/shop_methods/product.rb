@@ -20,7 +20,7 @@ module ShopMethods
     # Creates a new product
     def create(params)
       if (product = ::Product.create(name: params[:name], price: params[:price], description: params[:description], delivery_fee: params[:delivery_fee], shop_id: @shop_id, country: params[:product][:country]))
-        variant_params(product, params)
+        ShopMethods::Product.new(@shop_id).variant_params(product, params)
         { message: 'Product Created Successfully', product: product, status: :created }
       else
         { message: product.errors.full_messages, product: nil, status: :unprocessable_entity }
