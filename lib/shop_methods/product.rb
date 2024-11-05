@@ -20,21 +20,7 @@ module ShopMethods
     # Creates a new product
     def create(params)
       if (product = ::Product.create(name: params[:name], price: params[:price], description: params[:description], delivery_fee: params[:delivery_fee], shop_id: @shop_id, country: params[:product][:country]))
-        variant_params = params.select { |key, _| key.to_s.start_with?('variant') }
-        variant_params.each_value do |variant_param|
-          variant = product.variants.create(color: variant_param[:color], name: variant_param[:name])
-          if variant_param[:size].present?
-            variant_param[:size].each_with_index do |size, index|
-              variant.sizes.create(name: size, in_stock: variant_param[:quantity][index])
-            end
-          end
-          if variant_param[:variant_images].present?
-            variant_param[:variant_images].each do |image|
-              variant_image = Image.create(variant_id: variant.id)
-              variant_image.image.attach(image)
-            end
-          end
-        end
+        ShopMethods::Product.variant_params(params)
         { message: 'Product Created Successfully', product: product, status: :created }
       else
         { message: product.errors.full_messages, product: nil, status: :unprocessable_entity }
@@ -60,6 +46,24 @@ module ShopMethods
         { message: 'Product Deleted Successfully', product: nil, status: :deleted }
       else
         { message: product.errors.full_messages, product: nil, status: :unprocessable_entity }
+      end
+    end
+
+    def self.variant_params(params)
+      variant_params = params.select { |key, _| key.to_s.start_with?('variant') }
+      variant_params.each_value do |variant_param|
+        variant = product.variants.create(color: variant_param[:color], name: variant_param[:name])
+        if variant_param[:size].present?
+          variant_param[:size].each_with_index do |size, index|
+            variant.sizes.create(name: size, in_stock: variant_param[:quantity][index])
+          end
+        end
+        if variant_param[:variant_images].present?
+          variant_param[:variant_images].each do |image|
+            variant_image = Image.create(variant_id: variant.id)
+            variant_image.image.attach(image)
+          end
+        end
       end
     end
   end
