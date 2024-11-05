@@ -138,6 +138,12 @@ module Admin
         create_file "#{MAIN_PATH}/products/_variant_edit.html.erb", <<~EOF
           #{edit_variant_content}
         EOF
+
+        edit_path = File.join(__dir__, "templates/admin/views/products", "edit.html.erb")
+        edit_content = File.read(edit_path)
+        create_file "#{MAIN_PATH}/products/edit.html.erb", <<~EOF
+          #{edit_content}
+        EOF
       end
 
       def copy_stylesheets

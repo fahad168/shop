@@ -1,0 +1,14 @@
+<div class="bg-white dark:bg-gray-800">
+  <img src="<%= asset_path('cross_circle.svg') %>" class="w-4 h-4 hidden" id="cross_circle">
+  <div class="bg-white dark:bg-gray-800 py-12 px-3 md:px-0 rounded-2xl">
+    <%= form_with(url: "/shop/admin/products/#{@product.id}", method: :put, html: { id: 'product_form' }) do |f| %>
+      <%= f.hidden_field :products_color_ids, value: @product.variants.pluck(:id).to_json, id: 'product_variants' %>
+      <%= render 'shop/admin/products/form', f: f, product: @product %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+    var count = <%= @product.variants.count + 1 %>
+    var variant_count = <%= @product.variants.count %>
+</script>

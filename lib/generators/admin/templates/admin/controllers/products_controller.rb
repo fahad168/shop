@@ -4,7 +4,7 @@ class Shop::Admin::ProductsController < ShopAdminController
 
   def index
     response = ShopMethods::Product.new(@current_shop.id).specific_shop_products(:desc, params[:q], params[:filter])
-    @products = response[:products].paginate(per_page: 2, page: params[:page])
+    @products = response[:products]
   end
 
   def new
@@ -21,9 +21,19 @@ class Shop::Admin::ProductsController < ShopAdminController
     end
   end
 
-  def edit; end
+  def edit
+    @product = Product.find_by(id: params[:id])
+    add_breadcrumb @product.name
+  end
 
-  def update; end
+  def update
+    response =  ShopMethods::Product.new(@current_shop.id).update(params, params[:id])
+    if response[:status] == :updated
+      redirect_to shop_admin_products_path, notice: response[:message]
+    else
+      redirect_to shop_admin_products_path(id: params[:id]), alert: response[:message]
+    end
+  end
 
   def destroy
     response = ShopMethods::Product.new(@current_shop.id).delete_product(params[:id])
@@ -44,5 +54,4 @@ class Shop::Admin::ProductsController < ShopAdminController
   def variant_fields
     render json: { entries: render_to_string(partial: 'shop/admin/products/variant', locals: { count: params[:count], f: params[:f] }) }
   end
-
 end
