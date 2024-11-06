@@ -1,42 +1,32 @@
-<!--<style>-->
-<!--    @media (prefers-color-scheme: dark) {-->
-<!--        .chosen-single {-->
-<!--            border: none !important;-->
-<!--            -webkit-box-shadow: none !important;-->
-<!--            box-shadow: none !important;-->
-<!--        }-->
-
-<!--        /*.chosen-container-single {*/-->
-<!--        /*    background-color: #2d3748 !important;*/-->
-<!--        /*}*/-->
-<!--    }-->
-<!--</style>-->
-
 <div class="max-w-[662px] mx-auto">
   <p class="text-[red] text-md mb-6" id="variant_error"></p>
   <div class="flex flex-col sm:flex-row gap-2 mb-6">
     <div class="w-full">
       <label class="block mb-2 text-sm font-normal text-[#000000] dark:text-white ">Product Title  <span class="text-[#FF8717]">*</span></label>
-      <input value="<%= product.present? ? product.name : '' %>" name="name" class=" border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="Enter" required />
+      <input autocomplete="off" value="<%= product.present? ? product.name : '' %>" name="name" class=" border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="Enter" required />
     </div>
     <div class="w-full">
       <label class="block mb-2 text-sm font-normal text-[#000000] dark:text-white">Price  <span class="text-[#FF8717]">*</span></label>
-      <input value="<%= product.present? ? product.price : '' %>" type="number" name="price" class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black  block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="Enter" required />
+      <input autocomplete="off" value="<%= product.present? ? product.price : '' %>" type="number" name="price" class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black  block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="Enter" required />
     </div>
   </div>
   <div class="mb-6">
     <label class="block mb-2 text-sm font-medium text-[#000000] dark:text-white">Description  <span class="text-[#FF8717]">*</span></label>
     <textarea name="description" required rows="4" class="block p-2.5 w-full text-sm text-[#000000] h-[89px] rounded-lg border border-[#D1D5DB] focus:outline-transparent focus:border-gray-300 focus:ring-0 !outline-none dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none"><%= product.present? ? product.description : '' %></textarea>
   </div>
-  <div class="grid grid-cols-2 gap-2 mb-6">
+  <div class="grid grid-cols-2 gap-2">
     <div class="mb-6">
       <label class="block mb-2 text-sm font-medium text-[#000000] dark:text-white">Delivery Fee  <span class="text-[#FF8717]">*</span></label>
-      <input type="number" value="<%= product.present? ? product.delivery_fee : '' %>" name="delivery_fee" required class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="Enter">
+      <input autocomplete="off" type="number" value="<%= product.present? ? product.delivery_fee : '' %>" name="delivery_fee" required class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="Enter">
     </div>
     <div class="mb-6 w-full">
       <label class="block mb-2 text-sm font-medium text-[#000000] dark:text-white">Country  <span class="text-[#FF8717]">*</span></label>
       <%= country_select_with_flags(:product, :country, { selected: product.present? ? product.country : nil }, { placeholder: 'Select Countries', required: true }) %>
     </div>
+  </div>
+  <div class="mb-6">
+    <label class="block mb-2 text-sm font-medium text-[#000000] dark:text-white">Product Category  <span class="text-[#FF8717]">*</span></label>
+    <input required value="<%= product.present? ? product.categories : "" %>" name="categories" class='block advance-options border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black block w-full dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none'>
   </div>
   <div class="flex flex-col" id="variants">
     <% if product.present? %>
@@ -75,3 +65,4 @@
 </script>
 
 <%= javascript_include_tag('shop') %>
+

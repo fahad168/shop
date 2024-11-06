@@ -1,4 +1,5 @@
 require 'shop_methods/size'
+require 'shop_methods/variant'
 
 module ShopMethods
   class Product
@@ -21,7 +22,7 @@ module ShopMethods
 
     # Creates a new product
     def create(params)
-      if (product = ::Product.create(name: params[:name], price: params[:price], description: params[:description], delivery_fee: params[:delivery_fee], shop_id: @shop_id, country: params[:product][:country]))
+      if (product = ::Product.create(name: params[:name], categories: JSON.parse(params[:categories]).map { |cat| { "value" => cat["value"] } }, price: params[:price], description: params[:description], delivery_fee: params[:delivery_fee], shop_id: @shop_id, country: params[:product][:country]))
         ShopMethods::Product.variant_params(params, product)
         { message: 'Product Created Successfully', product: product, status: :created }
       else
@@ -33,7 +34,7 @@ module ShopMethods
     def update(params, product_id)
       return { message: 'Product not found', product: nil, status: :not_found } unless (product = ::Product.find_by(id: product_id))
 
-      if product.update(name: params[:name], price: params[:price], description: params[:description], delivery_fee: params[:delivery_fee], shop_id: @shop_id, country: params[:product][:country])
+      if product.update(name: params[:name], categories: JSON.parse(params[:categories]).map { |cat| { "value" => cat["value"] } }, price: params[:price], description: params[:description], delivery_fee: params[:delivery_fee], shop_id: @shop_id, country: params[:product][:country])
         ShopMethods::Product.update_variant_params(params, product)
         { message: 'Product Updated Successfully', product: product, status: :updated }
       else
@@ -111,7 +112,7 @@ module ShopMethods
     def self.variant_params(params, product)
       variant_params = params.select { |key, _| key.to_s.start_with?('variant') }
       variant_params.each_value do |variant_param|
-        variant = product.variants.create(color: variant_param[:color], name: variant_param[:name])
+        variant = ShopMethods::Variant.new.create(product.id, variant_param[:name], variant_param[:color])
         if variant_param[:size].present?
           variant_param[:size].each_with_index do |size, index|
             ShopMethods::Size.new.create_single_size(variant.id, size, nil, variant_param[:in_stock][index])

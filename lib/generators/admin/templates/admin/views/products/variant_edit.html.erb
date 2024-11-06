@@ -26,14 +26,28 @@
       <% variant.sizes&.each_with_index do |size, index| %>
         <div class="mb-6">
           <div class="w-full sm:max-w-[327px]">
-            <label class="block mb-2 text-sm font-normal text-[#000000]">Quantity (<%= size.name %>)</label>
+            <label class="block mb-2 text-sm font-normal text-[#000000] dark:bg-white">Quantity (<%= size.name %>)</label>
             <input id="<%= size.name %>" type="number" value="<%= size.in_stock %>" name="<%= variant.id %>[in_stock][]" class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none">
           </div>
         </div>
       <% end %>
     </div>
     <div class="my-6">
-      <p class=" text-sm font-normal mb-2">Upload Image <span class="text-[red]">*</span></p>
+      <p class=" text-sm font-normal mb-2 text-[#000000] dark:bg-white">Upload Image <span class="text-[red]">*</span></p>
+      <div class="flex flex-row justify-start w-full">
+        <div id="selectedImages<%= count %>" class="mt-3 mb-2 max-h-[150px] overflow-x-auto flex space-x-2"></div>
+        <% if variant.images.present? %>
+          <div id="showedImages<%= count %>" class="mt-3 mb-2 max-h-[150px] overflow-x-auto flex space-x-2">
+            <%= f.hidden_field "#{variant.id}[image_ids]".to_sym, value: variant.images.pluck(:id).to_json, id: "variant_edit_images_#{count}" %>
+            <% variant.images.each do |image| %>
+              <div id="selected_div_<%= count %>_<%= image.image.blob.filename %>" class="relative">
+                <img src="<%= asset_path('cross_circle.svg') %>" class="absolute w-4 h-4 right-[4%] top-[4%] cursor-pointer hover:opacity-75" id="image_<%= count %>_<%= image.image.blob.filename %>" onclick="removeImageWithId('<%= count %>', '<%= image.image.blob.filename  %>', '<%= image.id %>')">
+                <img alt="<%= image.image.blob.filename %>" src="<%= image.image.blob.url %>" class="object-cover w-[150px] h-[150px] rounded-2xl" id="variant_images_<%= count %>">
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
       <input id="previously_selected_<%= count %>" type="file" class="hidden" multiple accept="image/jpeg, image/png, image/jpg" />
       <div class="flex items-center justify-center  w-full mb-[9px]">
         <label for="dropzone-file-<%= count %>" class="flex flex-col items-center justify-center bg-[#FF87171A] w-full h-[130px] border-2 rounded-lg border-dashed border-[#000000] cursor-pointer dark:border-[#FF8717]">

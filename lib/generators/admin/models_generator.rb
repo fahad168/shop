@@ -13,6 +13,7 @@ module Admin
         migration_template "migrations/create_products.rb", "db/migrate/create_products.rb"
         migration_template "migrations/create_variants.rb", "db/migrate/create_variants.rb"
         migration_template "migrations/create_sizes.rb", "db/migrate/create_sizes.rb"
+        migration_template "migrations/create_images.rb", "db/migrate/create_images.rb"
       end
 
       # Copying model templates
@@ -21,6 +22,7 @@ module Admin
         template "models/product.rb", "app/models/product.rb"
         template "models/variant.rb", "app/models/variant.rb"
         template "models/size.rb", "app/models/size.rb"
+        template "models/image.rb", "app/models/image.rb"
       end
 
       # Setting migration numbers
