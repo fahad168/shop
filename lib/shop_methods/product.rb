@@ -112,15 +112,15 @@ module ShopMethods
     def self.variant_params(params, product)
       variant_params = params.select { |key, _| key.to_s.start_with?('variant') }
       variant_params.each_value do |variant_param|
-        variant = ShopMethods::Variant.new.create(product.id, variant_param[:name], variant_param[:color])
+        response = ShopMethods::Variant.new.create(product.id, variant_param[:name], variant_param[:color])
         if variant_param[:size].present?
           variant_param[:size].each_with_index do |size, index|
-            ShopMethods::Size.new.create_single_size(variant.id, size, nil, variant_param[:in_stock][index])
+            ShopMethods::Size.new.create_single_size(response[:variant].id, size, nil, variant_param[:in_stock][index])
           end
         end
         if variant_param[:variant_images].present?
           variant_param[:variant_images].each do |image|
-            variant_image = Image.create(variant_id: variant.id)
+            variant_image = Image.create(variant_id: response[:variant].id)
             variant_image.image.attach(image)
           end
         end
