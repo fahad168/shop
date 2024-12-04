@@ -67,9 +67,9 @@ module Customer
           #{cart_index_content}
         EOF
 
-        cart_item_path = File.join(__dir__, "templates/user/views/cart", "cart_item.html.erb")
+        cart_item_path = File.join(__dir__, "templates/user/views/cart", "cart_items.html.erb")
         cart_item_content = File.read(cart_item_path)
-        create_file "#{MAIN_PATH}/cart/_cart_item.html.erb", <<~EOF
+        create_file "#{MAIN_PATH}/cart/_cart_items.html.erb", <<~EOF
           #{cart_item_content}
         EOF
 
