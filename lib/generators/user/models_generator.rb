@@ -1,14 +1,13 @@
-# frozen_string_literal: true
-
 require "rails/generators"
 require "rails/generators/migration"
 
-module Shop
+module User
   module Generators
-    class UserGenerator < Rails::Generators::Base
+    class ModelsGenerator < Rails::Generators::Base
       include Rails::Generators::Migration
       source_root File.expand_path("templates/user", __dir__)
 
+      # Copying migration templates
       def copy_migration
         migration_template "migrations/create_carts.rb", "db/migrate/create_carts.rb"
         migration_template "migrations/create_cart_items.rb", "db/migrate/create_cart_items.rb"
@@ -19,10 +18,7 @@ module Shop
         template "models/cart_item.rb", "app/models/cart_item.rb"
       end
 
-      def copy_controllers
-        template "controllers/products_controller.rb", "app/controllers/user/products_controller.rb"
-      end
-
+      # Setting migration numbers
       def self.next_migration_number(path)
         if @prev_migration_nr
           @prev_migration_nr += 1

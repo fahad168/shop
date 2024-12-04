@@ -7,7 +7,12 @@ class CreateProducts < ActiveRecord::Migration[6.0]
       t.float :price
       t.string :categories, array: true, default: []
       t.text :description
-      t.float :delivery_fee
+      t.float :discount
+      t.string :estimated_delivery_days
+      t.string :return_eligibility_days
+      t.string :care_instructions
+      t.string :item_weight
+      t.string :item_dimensions
       t.string :country
 
       t.timestamps

@@ -14,6 +14,7 @@ module Admin
         template "controllers/shop_controller.rb", "#{MAIN_PATH}/shop_controller.rb"
         template "controllers/dashboard_controller.rb", "#{MAIN_PATH}/dashboard_controller.rb"
         template "controllers/products_controller.rb", "#{MAIN_PATH}/products_controller.rb"
+        template "controllers/settings_controller.rb", "#{MAIN_PATH}/settings_controller.rb"
       end
 
       # Adding routes
@@ -28,13 +29,19 @@ module Admin
           end
           namespace :shop do
             namespace :admin do
-              resources :dashboard
+              resources :dashboard do
+                collection do
+                  get :pie_chart
+                end
+              end
               resources :products do
                 collection do
                   get :variant_fields
                   delete :multiple_destroy
+                  get :variant_info
                 end
               end
+              resources :settings
             end
           end
         RUBY

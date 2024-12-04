@@ -1,0 +1,10 @@
+<div class="flex gap-3 items-center">
+  <p class="text-sm text-black font-normal font-sans">Size</p>
+  <div class="bg-gray-300 w-1 h-1 rounded-full"></div>
+  <p class="text-sm text-gray-300 font-normal font-sans" id="size_name"><%= variant.sizes.first.name %></p>
+</div>
+<div class="flex flex-row flex-wrap gap-2 mt-4">
+  <% variant.sizes.each_with_index do |size, index| %>
+    <button onclick="replace_size_name('<%= size.name %>', '<%= index %>', '<%= size.variant.product.id %>', '<%= size.variant.id %>', '<%= size.id %>', '<%= size.variant.product.price %>')" id="size_name_radio_<%= index %>" type="button" value="" name="default-radio" class="<%= index == 0 ? 'border border-black' : '' %> w-[70px] h-[37px] rounded-lg flex justify-center items-center px-[29px] py-2 bg-gray-100 border-gray-300 text-[#525252] !outline-none"><%= size.name %></button>
+  <% end %>
+</div>

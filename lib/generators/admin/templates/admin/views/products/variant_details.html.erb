@@ -1,0 +1,13 @@
+<% hex = if %w[rgb hsl].any? { |prefix| variant.color.start_with?(prefix) }
+           convert_rgb_to_color(variant.color).html
+         else
+           variant.color
+         end
+%>
+<h1 class="font-normal text-[#8F8F8F] dark:text-white text-base mb-[17px]" style="margin-top: 10px">Color: <span class="text-sm font-normal text-[#292929] dark:text-gray-400" id="color_name"><%= variant.color.present? ? ColorName.get("#{hex}") : '' %></span></h1>
+<div class="flex gap-[13px] flex-wrap mb-4">
+  <button id="default-radio-<%= variant.id %>" type="button" value="" name="default-radio" class=" px-[20px] py-5 w-[71px] h-[40px] flex justify-center items-center rounded-lg font-medium border border-white transition-all focus:border-[#333333] focus:border focus:outline-white focus:ring-0 !outline-none">
+    <h1 class="text-sm px-[29px] py-[13px] rounded-md" style="background-color: <%= variant.color %>"></h1>
+  </button>
+</div>
+<%= render 'shop/admin/products/size', variant: variant %>

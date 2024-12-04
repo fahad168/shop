@@ -26,7 +26,7 @@ module ShopMethods
       cart_item = ::CartItem.new(cart_id: @cart.id, product_id: @product.id, variant_id: @variant.id, size_id: @size.id, quantity: quantity, amount: amount)
       if cart_item.save
         update_cart_amount(amount, 'add')
-        { message: 'Item Added Successfully', cart_item: cart_item, status: :created }
+        { message: 'Product successfully added to your cart.', cart_item: cart_item, status: :created }
       else
         { message: cart_item.errors.full_messages, cart_item: nil, status: :unprocessable_entity }
       end
@@ -42,7 +42,7 @@ module ShopMethods
       old_amount = cart_item.amount
       if cart_item.update(quantity: old_quantity + quantity, amount: old_amount + new_amount)
         update_cart_amount(amount, key)
-        { message: "Item #{key.capitalize}ed Successfully", cart_item: cart_item, status: :updated }
+        { message: "Product #{key}ed successfully to your cart.", cart_item: cart_item, status: :updated }
       else
         { message: cart_item.errors.full_messages, cart_item: nil, status: :unprocessable_entity }
       end
@@ -54,7 +54,7 @@ module ShopMethods
 
       if cart_item.destroy
         update_cart_amount(cart_item.amount, 'remove')
-        { message: 'Cart Item Deleted Successfully', cart_item: nil, status: :deleted }
+        { message: 'Cart item deleted successfully', cart_item: nil, status: :deleted }
       else
         { message: cart_item.errors.full_messages, cart_item: nil, status: :unprocessable_entity }
       end

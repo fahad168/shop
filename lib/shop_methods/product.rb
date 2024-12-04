@@ -22,7 +22,7 @@ module ShopMethods
 
     # Creates a new product
     def create(params)
-      if (product = ::Product.create(name: params[:name], categories: JSON.parse(params[:categories]).map { |cat| cat["value"] }, price: params[:price], description: params[:description], delivery_fee: params[:delivery_fee], shop_id: @shop_id, country: params[:product][:country]))
+      if (product = ::Product.create(name: params[:name], categories: JSON.parse(params[:categories]).map { |cat| cat["value"] }, price: params[:price], description: params[:description], discount: params[:discount], shop_id: @shop_id, country: params[:product][:country], item_weight: params[:weight], item_dimensions: params[:dimensions], care_instructions: params[:care_instructions], estimated_delivery_days: params[:estimated_delivery_days], return_eligibility_days: params[:return_eligibility_days]))
         ShopMethods::Product.variant_params(params, product)
         { message: 'Product Created Successfully', product: product, status: :created }
       else
@@ -34,7 +34,7 @@ module ShopMethods
     def update(params, product_id)
       return { message: 'Product not found', product: nil, status: :not_found } unless (product = ::Product.find_by(id: product_id))
 
-      if product.update(name: params[:name], categories: JSON.parse(params[:categories]).map { |cat| cat["value"] }, price: params[:price], description: params[:description], delivery_fee: params[:delivery_fee], shop_id: @shop_id, country: params[:product][:country])
+      if product.update(name: params[:name], categories: JSON.parse(params[:categories]).map { |cat| cat["value"] }, price: params[:price], description: params[:description], delivery_fee: params[:delivery_fee], shop_id: @shop_id, country: params[:product][:country], item_weight: params[:weight], item_dimensions: params[:dimensions], care_instructions: params[:care_instructions], estimated_delivery_days: params[:estimated_delivery_days], return_eligibility_days: params[:return_eligibility_days])
         ShopMethods::Product.update_variant_params(params, product)
         { message: 'Product Updated Successfully', product: product, status: :updated }
       else

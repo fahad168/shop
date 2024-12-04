@@ -1,4 +1,20 @@
-<nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+<style>
+    .sidebar-item:hover::before,
+    .sidebar-item.active::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background-color: <%= @current_shop.sidebar_content_hover_color %>;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+</style>
+
+<nav class="fixed top-0 z-50 w-full bg-[<%= @current_shop.header_color %>] border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700" id="navbar">
   <div class="px-3 py-3 lg:px-5 lg:pl-3">
     <div class="flex items-center justify-between">
       <div class="flex items-center justify-start rtl:justify-end">
@@ -8,9 +24,17 @@
             <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
           </svg>
         </button>
-        <a href="https://flowbite.com" class="flex ms-2 md:me-24">
-          <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" />
-          <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white"><%= @current_shop.name.capitalize %></span>
+        <a href="/shop/admin/dashboard" class="flex ms-2 md:me-24">
+          <div id="header_logo">
+            <% if @current_shop.shop_image.attached? %>
+              <img class="h-10 rounded-lg" src="<%= rails_blob_path(@current_shop.shop_image) %>">
+            <% else %>
+              <div class="flex flex-col p-1.5 rounded-lg bg-gray-200 dark:bg-gray-600 border border-gray-300 dark:border-gray-500">
+                <svg class="h-8 fill-[#0F0F0F] dark:fill-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M5.13238 1C4.07859 1 3.10207 1.5529 2.5599 2.45651L0.615776 5.69672C0.17816 6.42608 0.0121122 7.42549 0.508798 8.32014C0.789678 8.82607 1.27459 9.55181 2 10.1205V20C2 21.6569 3.34315 23 5 23H8C9.10457 23 10 22.1046 10 21V15H14V21C14 22.1046 14.8954 23 16 23H19C20.6569 23 22 21.6569 22 20V10.1205C22.7254 9.55181 23.2103 8.82607 23.4912 8.32014C23.9879 7.42548 23.8218 6.42608 23.3842 5.69672L21.4401 2.45651C20.8979 1.5529 19.9214 1 18.8676 1H5.13238ZM20 10.9697C19.8391 10.9895 19.6725 11 19.5 11C18.1259 11 17.1126 10.3216 16.4364 9.60481C16.2632 9.4211 16.1082 9.23119 15.9705 9.04325C15.2167 9.98812 13.9542 11 12 11C10.0458 11 8.7833 9.98812 8.02952 9.04325C7.89183 9.23119 7.73684 9.4211 7.56355 9.60481C6.8874 10.3216 5.87405 11 4.5 11C4.32752 11 4.16089 10.9895 4 10.9697V20C4 20.5523 4.44772 21 5 21H8V15C8 13.8954 8.89543 13 10 13H14C15.1046 13 16 13.8954 16 15V21H19C19.5523 21 20 20.5523 20 20V10.9697ZM4.27489 3.4855C4.45561 3.1843 4.78112 3 5.13238 3H18.8676C19.2189 3 19.5444 3.1843 19.7251 3.4855L21.6692 6.72571C21.8324 6.99765 21.8127 7.2231 21.7426 7.34937C21.2851 8.17345 20.5493 9 19.5 9C18.8448 9 18.323 8.69006 17.8913 8.23245C17.4506 7.76524 17.1659 7.20393 17.0284 6.88399C16.8114 6.37951 16.3329 6.21388 16.0033 6.21248C15.674 6.21109 15.1982 6.37172 14.9752 6.8683C14.6702 7.54754 13.7982 9 12 9C10.2018 9 9.32978 7.54754 9.0248 6.8683C8.80182 6.37172 8.32598 6.21109 7.99667 6.21248C7.66706 6.21388 7.18855 6.37951 6.97164 6.88399C6.83407 7.20393 6.5494 7.76524 6.10869 8.23245C5.67703 8.69006 5.15524 9 4.5 9C3.45065 9 2.71491 8.17345 2.2574 7.34937C2.1873 7.2231 2.1676 6.99765 2.33076 6.72571L4.27489 3.4855Z"></path> </g></svg>
+              </div>
+            <% end %>
+          </div>
+          <span class="self-center text-[<%= @current_shop.name_color %>] ml-3 text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white" id="shop_name"><%= @current_shop.name.capitalize %></span>
         </a>
       </div>
       <div class="flex items-center">
@@ -44,7 +68,7 @@
           <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
             <div class="px-4 py-3" role="none">
               <p class="text-sm text-gray-900 dark:text-white" role="none">
-                Neil Sims
+                <%= @current_shop.name %>
               </p>
               <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
                 neil.sims@flowbite.com
@@ -52,10 +76,10 @@
             </div>
             <ul class="py-1" role="none">
               <li>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Dashboard</a>
+                <a href="/shop/admin/dashboard" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Dashboard</a>
               </li>
               <li>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
+                <a href="/shop/admin/settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
               </li>
               <li>
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a>
@@ -71,80 +95,46 @@
   </div>
 </nav>
 
-<aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
-  <div class="h-full pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+<aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-[<%= @current_shop.sidebar_color %>] border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
+  <div id="sidebar" class="h-full pb-4 overflow-y-auto bg-[<%= @current_shop.sidebar_color %>] dark:bg-gray-800">
     <ul class="space-y-2 font-medium">
-      <li>
-        <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-          <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
-            <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
-            <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
-          </svg>
-          <span class="ms-3">Dashboard</span>
-        </a>
-      </li>
-      <div class="main_group">
-        <li id="product_sidebar" class="sidebar-item hover:active <%= params[:controller] == 'shop/admin/products' ? 'active' : '' %>">
-          <a data-turbo="false" class="ml-3 flex items-center gap-3 cursor-pointer px-3 group" href="/shop/admin/products">
-            <svg class="w-6 h-6 group-hover:fill-[#FF8717] <%= params[:controller] == 'shop/admin/products' ? 'fill-[#FF8717]' : 'fill-gray-500 dark:fill-white' %>" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-              <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"/>
+      <div class="main_group mt-3 mb-5" id="sidebar_li_main">
+        <li id="hover_effect_0" class="sidebar-item hover:active <%= params[:controller] == 'shop/admin/dashboard' ? 'active' : '' %>">
+          <a data-turbo="false" class="ml-3 flex items-center gap-3 cursor-pointer px-3 group" href="/shop/admin/dashboard">
+            <svg id="admin_sidebar_svg_0" class="w-6 h-6 dark:group-hover:fill-[#FF8717] group-hover:fill-[<%= @current_shop.sidebar_content_hover_color %>] <%= params[:controller] == 'shop/admin/dashboard' ? "fill-[#{@current_shop.sidebar_content_hover_color}] dark:fill-[#FF8717]" : "fill-[#{@current_shop.sidebar_content_color}] dark:fill-white" %>" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+              <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
+              <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
             </svg>
             <div class="w-full justify-between flex flex-row">
-              <span class="group-hover:text-[#FF8717] ml-1 mt-1 <%= params[:controller] == 'shop/admin/products' ? 'text-[#FF8717]' : 'text-gray-500 dark:text-white' %>">Products</span>
+              <span id="admin_sidebar_text_0" class="dark:group-hover:text-[#FF8717] group-hover:text-[<%= @current_shop.sidebar_content_hover_color %>] ml-1 <%= params[:controller] == 'shop/admin/dashboard' ? "text-[#{@current_shop.sidebar_content_hover_color}] dark:text-[#FF8717]" : "text-[#{@current_shop.sidebar_content_color}] dark:text-white" %>">Dashboard</span>
             </div>
           </a>
         </li>
       </div>
-      <li>
-        <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-          <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z"/>
-            <path d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z"/>
-            <path d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z"/>
-          </svg>
-          <span class="flex-1 ms-3 whitespace-nowrap">Sign Out</span>
-        </a>
-      </li>
+      <div class="main_group" style="margin-bottom: 1.25rem">
+        <li id="hover_effect_1" class="sidebar-item hover:active <%= params[:controller] == 'shop/admin/products' ? 'active' : '' %>">
+          <a data-turbo="false" class="ml-3 flex items-center gap-3 cursor-pointer px-3 group" href="/shop/admin/products">
+            <svg id="admin_sidebar_svg_1" class="w-5 h-5 dark:group-hover:fill-[#FF8717] group-hover:fill-[<%= @current_shop.sidebar_content_hover_color %>] <%= params[:controller] == 'shop/admin/products' ? "fill-[#{@current_shop.sidebar_content_hover_color}] dark:fill-[#FF8717]" : "fill-[#{@current_shop.sidebar_content_color}] dark:fill-white" %>" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+              <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"/>
+            </svg>
+            <div class="w-full justify-between flex flex-row">
+              <span id="admin_sidebar_text_1" class="group-hover:text-[<%= @current_shop.sidebar_content_hover_color %>] dark:group-hover:text-[#FF8717] ml-2 mt-1 <%= params[:controller] == 'shop/admin/products' ? "text-[#{@current_shop.sidebar_content_hover_color}] dark:text-[#FF8717]" : "text-[#{@current_shop.sidebar_content_color}] dark:text-white" %>">Products</span>
+            </div>
+          </a>
+        </li>
+      </div>
+      <div class="main_group">
+        <li id="hover_effect_2" class="sidebar-item hover:active <%= params[:controller] == 'shop/admin/settings' ? 'active' : '' %>">
+          <a data-turbo="false" class="ml-3 flex items-center gap-3 cursor-pointer px-[9px] group" href="/shop/admin/settings">
+            <svg id="admin_sidebar_svg_2" class="w-7 h-7 dark:group-hover:fill-[#FF8717] group-hover:fill-[<%= @current_shop.sidebar_content_hover_color %>] <%= params[:controller] == 'shop/admin/settings' ? "fill-[#{@current_shop.sidebar_content_hover_color}] dark:fill-[#FF8717]" : "fill-[#{@current_shop.sidebar_content_color}] dark:fill-white" %>" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.096"></g><g id="SVGRepo_iconCarrier">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2788 2.15224C13.9085 2 13.439 2 12.5 2C11.561 2 11.0915 2 10.7212 2.15224C10.2274 2.35523 9.83509 2.74458 9.63056 3.23463C9.53719 3.45834 9.50065 3.7185 9.48635 4.09799C9.46534 4.65568 9.17716 5.17189 8.69017 5.45093C8.20318 5.72996 7.60864 5.71954 7.11149 5.45876C6.77318 5.2813 6.52789 5.18262 6.28599 5.15102C5.75609 5.08178 5.22018 5.22429 4.79616 5.5472C4.47814 5.78938 4.24339 6.1929 3.7739 6.99993C3.30441 7.80697 3.06967 8.21048 3.01735 8.60491C2.94758 9.1308 3.09118 9.66266 3.41655 10.0835C3.56506 10.2756 3.77377 10.437 4.0977 10.639C4.57391 10.936 4.88032 11.4419 4.88029 12C4.88026 12.5581 4.57386 13.0639 4.0977 13.3608C3.77372 13.5629 3.56497 13.7244 3.41645 13.9165C3.09108 14.3373 2.94749 14.8691 3.01725 15.395C3.06957 15.7894 3.30432 16.193 3.7738 17C4.24329 17.807 4.47804 18.2106 4.79606 18.4527C5.22008 18.7756 5.75599 18.9181 6.28589 18.8489C6.52778 18.8173 6.77305 18.7186 7.11133 18.5412C7.60852 18.2804 8.2031 18.27 8.69012 18.549C9.17714 18.8281 9.46533 19.3443 9.48635 19.9021C9.50065 20.2815 9.53719 20.5417 9.63056 20.7654C9.83509 21.2554 10.2274 21.6448 10.7212 21.8478C11.0915 22 11.561 22 12.5 22C13.439 22 13.9085 22 14.2788 21.8478C14.7726 21.6448 15.1649 21.2554 15.3694 20.7654C15.4628 20.5417 15.4994 20.2815 15.5137 19.902C15.5347 19.3443 15.8228 18.8281 16.3098 18.549C16.7968 18.2699 17.3914 18.2804 17.8886 18.5412C18.2269 18.7186 18.4721 18.8172 18.714 18.8488C19.2439 18.9181 19.7798 18.7756 20.2038 18.4527C20.5219 18.2105 20.7566 17.807 21.2261 16.9999C21.6956 16.1929 21.9303 15.7894 21.9827 15.395C22.0524 14.8691 21.9088 14.3372 21.5835 13.9164C21.4349 13.7243 21.2262 13.5628 20.9022 13.3608C20.4261 13.0639 20.1197 12.558 20.1197 11.9999C20.1197 11.4418 20.4261 10.9361 20.9022 10.6392C21.2263 10.4371 21.435 10.2757 21.5836 10.0835C21.9089 9.66273 22.0525 9.13087 21.9828 8.60497C21.9304 8.21055 21.6957 7.80703 21.2262 7C20.7567 6.19297 20.522 5.78945 20.2039 5.54727C19.7799 5.22436 19.244 5.08185 18.7141 5.15109C18.4722 5.18269 18.2269 5.28136 17.8887 5.4588C17.3915 5.71959 16.7969 5.73002 16.3099 5.45096C15.8229 5.17191 15.5347 4.65566 15.5136 4.09794C15.4993 3.71848 15.4628 3.45833 15.3694 3.23463C15.1649 2.74458 14.7726 2.35523 14.2788 2.15224ZM12.5 15C14.1695 15 15.5228 13.6569 15.5228 12C15.5228 10.3431 14.1695 9 12.5 9C10.8305 9 9.47716 10.3431 9.47716 12C9.47716 13.6569 10.8305 15 12.5 15Z"></path> </g>
+            </svg>
+            <div class="w-full justify-between flex flex-row">
+              <span id="admin_sidebar_text_2" class="dark:group-hover:text-[#FF8717] group-hover:text-[<%= @current_shop.sidebar_content_hover_color %>] ml-1 mt-1 <%= params[:controller] == 'shop/admin/settings' ? "text-[#{@current_shop.sidebar_content_hover_color}] dark:text-[#FF8717]" : "text-[#{@current_shop.sidebar_content_color}] dark:text-white dark:group-hover:text-[#FF8717]" %>">Settings</span>
+            </div>
+          </a>
+        </li>
+      </div>
     </ul>
   </div>
 </aside>
-
-
-<script>
-    // function toggleDarkMode() {
-    //     document.documentElement.classList.toggle('dark');
-    // }
-
-    function toggleDarkMode() {
-        const htmlElement = document.documentElement;
-
-        if (htmlElement.classList.contains('dark')) {
-            htmlElement.classList.remove('dark');
-            $('.theme-switch__checkbox')[0].setAttribute('checked', 'true')
-            localStorage.setItem('theme', 'light');
-        } else {
-            htmlElement.classList.add('dark');
-            $('.theme-switch__checkbox')[0].removeAttribute('checked')
-            localStorage.setItem('theme', 'dark');
-        }
-    }
-
-    function loadTheme() {
-        const theme = localStorage.getItem('theme');
-
-        if (theme === 'dark') {
-            $('.theme-switch__checkbox')[0].setAttribute('checked', 'true')
-            document.documentElement.classList.add('dark');
-        } else if (theme === 'light') {
-            $('.theme-switch__checkbox')[0].removeAttribute('checked')
-            document.documentElement.classList.remove('dark');
-        } else {
-            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.documentElement.classList.add('dark');
-                $('.theme-switch__checkbox')[0].setAttribute('checked', 'true')
-            }
-        }
-    }
-    loadTheme();
-
-</script>

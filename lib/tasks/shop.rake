@@ -13,4 +13,19 @@ namespace :shop do
   task install: :environment do
     Rails::Generators.invoke("admin:views")
   end
+
+  desc "User Models Generator"
+  task install: :environment do
+    Rails::Generators.invoke("user:models")
+  end
+
+  desc "User Controller And Routes Generator"
+  task install: :environment do
+    Rails::Generators.invoke("user:controllers")
+  end
+
+  desc "User Views Generator"
+  task install: :environment do
+    Rails::Generators.invoke("user:views")
+  end
 end

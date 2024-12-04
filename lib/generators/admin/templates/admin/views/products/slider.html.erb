@@ -1,0 +1,64 @@
+<style>
+    .splide__track--slide::marker {
+        content: none !important;
+    }
+</style>
+<div class="w-full lg:max-w-[425px] relative ">
+  <section id="image-carousel" class="splide mb-[22px] bg-[#F2F2F2] rounded-lg">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <% variant.images&.each do |image| %>
+          <li class="splide__slide">
+            <%= image_tag rails_blob_path(image.image), class: "w-full lg:w-[425px] object-cover h-[464px]" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+  <section id="thumbnail-carousel" class="splide">
+    <li class="splide__track">
+      <ul class="splide__list">
+        <% variant.images&.each do |image| %>
+          <li class="splide__slide">
+            <%= image_tag rails_blob_path(image.image) , class: "bg-[#F2F2F2] rounded-lg object-cover w-[125px] sm:w-[100px] h-[93px]" %>
+          </li>
+        <% end %>
+      </ul>
+  </section>
+</div>
+
+<script>
+    var main = new Splide( '#image-carousel', {
+        type      : 'fade',
+        rewind    : true,
+        pagination: true,
+        arrows    : false,
+        rewindByDrag: true,
+    } );
+
+    var thumbnails = new Splide( '#thumbnail-carousel', {
+        rewind          : true,
+        fixedWidth      : 80,
+        fixedHeight     : 90,
+        isNavigation    : true,
+        gap             : 10,
+        pagination      : false,
+        cover           : true,
+        arrows          : false,
+        rewindByDrag    : true,
+        dragMinThreshold: {
+            mouse: 4,
+            touch: 10,
+        },
+        breakpoints : {
+            640: {
+                fixedWidth  : 66,
+                fixedHeight : 38,
+            },
+        },
+    } );
+
+    main.sync( thumbnails );
+    main.mount();
+    thumbnails.mount();
+</script>

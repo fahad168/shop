@@ -1,0 +1,257 @@
+<!--<style>-->
+<!--    #map {-->
+<!--        height: 500px;-->
+<!--        width: 100%;-->
+<!--    }-->
+
+<!--    .leaflet-popup-tip-container {-->
+<!--        margin-left: -20px !important;-->
+<!--    }-->
+
+<!--    .leaflet-popup-content-wrapper {-->
+<!--        padding: 4px !important;-->
+<!--    }-->
+
+<!--    .leaflet-popup-close-button {-->
+<!--        margin: 2px !important;-->
+<!--    }-->
+
+<!--    .leaflet-control-geocoder {-->
+<!--        border-radius: 10px !important;-->
+<!--        min-height: 35px !important;-->
+<!--    }-->
+
+<!--    .leaflet-control-geocoder-expanded {-->
+<!--        min-height: 35px !important;-->
+<!--    }-->
+
+<!--    .leaflet-control-geocoder-icon {-->
+<!--        background-color: transparent;-->
+<!--    }-->
+
+<!--    .leaflet-control-geocoder-alternatives {-->
+<!--        background: #fff;-->
+<!--        border-top: 1px solid #ddd;-->
+<!--        max-height: 200px;-->
+<!--        overflow-y: auto;-->
+<!--        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);-->
+<!--        margin-top: 5px;-->
+<!--        font-size: 14px;-->
+<!--    }-->
+
+<!--    .leaflet-control-geocoder-alternative {-->
+<!--        padding: 8px;-->
+<!--        cursor: pointer;-->
+<!--    }-->
+
+<!--    .leaflet-control-geocoder-alternative:hover {-->
+<!--        background-color: #f0f0f0;-->
+<!--    }-->
+<!--</style>-->
+
+<!--<div id="map"></div>-->
+
+<!--<script>-->
+<!--    const map = L.map('map', {-->
+<!--        attributionControl: false,-->
+<!--        trackResize: true,-->
+<!--        keyboard: true,-->
+<!--    }).setView([51.505, -0.09], 13);-->
+
+
+<!--    // Add OpenStreetMap tile layer-->
+<!--    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {-->
+<!--        maxZoom: 19,-->
+<!--        attributionControl: ''-->
+<!--    }).addTo(map);-->
+
+<!--    const geocoder = L.Control.geocoder({-->
+<!--        geocoder: new L.Control.Geocoder.Photon({-->
+<!--            serviceUrl: 'https://photon.komoot.io/api/',-->
+<!--        }),-->
+<!--        defaultMarkGeocode: false-->
+<!--    })-->
+<!--        .on('markgeocode', function(e) {-->
+<!--            const center = e.geocode.center;-->
+<!--            map.eachLayer(function (layer) {-->
+<!--                if (layer instanceof L.Marker) {-->
+<!--                    map.removeLayer(layer);-->
+<!--                }-->
+<!--            });-->
+<!--            L.marker(center).addTo(map)-->
+<!--                .bindPopup(e.geocode.name)-->
+<!--                .openPopup();-->
+<!--            map.setView(center, 13);-->
+<!--        })-->
+<!--        .addTo(map);-->
+
+<!--    map.on('click', function(e) {-->
+<!--        map.eachLayer(function (layer) {-->
+<!--            if (layer instanceof L.Marker) {-->
+<!--                map.removeLayer(layer);-->
+<!--            }-->
+<!--        });-->
+<!--        reverse_locate(e.latlng.lat, e.latlng.lng)-->
+<!--    });-->
+
+<!--    const locateControl = L.control({ position: 'topleft' });-->
+<!--    locateControl.onAdd = function () {-->
+<!--        const button = L.DomUtil.create('a', 'leaflet-bar');-->
+<!--        button.innerHTML = '<svg style="padding: 6px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.5017C14.4853 16.5017 16.5 14.487 16.5 12.0017C16.5 9.5164 14.4853 7.50168 12 7.50168C9.51472 7.50168 7.5 9.5164 7.5 12.0017C7.5 14.487 9.51472 16.5017 12 16.5017ZM12 14.5034C10.6184 14.5034 9.49832 13.3833 9.49832 12.0017C9.49832 10.62 10.6184 9.5 12 9.5C13.3816 9.5 14.5017 10.62 14.5017 12.0017C14.5017 13.3833 13.3816 14.5034 12 14.5034Z" fill="#0F0F0F"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M11 1C11 0.447715 11.4477 0 12 0C12.5523 0 13 0.447715 13 1V2.04938C17.7244 2.51844 21.4816 6.27558 21.9506 11H23C23.5523 11 24 11.4477 24 12C24 12.5523 23.5523 13 23 13H21.9506C21.4816 17.7244 17.7244 21.4816 13 21.9506V23C13 23.5523 12.5523 24 12 24C11.4477 24 11 23.5523 11 23V21.9506C6.27558 21.4816 2.51844 17.7244 2.04938 13H1C0.447715 13 0 12.5523 0 12C-1.19209e-07 11.4477 0.447715 11 1 11H2.04938C2.51844 6.27558 6.27558 2.51844 11 2.04938V1ZM12 20.0016C7.58083 20.0016 3.99839 16.4192 3.99839 12C3.99839 7.58083 7.58083 3.99839 12 3.99839C16.4192 3.99839 20.0016 7.58083 20.0016 12C20.0016 16.4192 16.4192 20.0016 12 20.0016Z" fill="#0F0F0F"></path> </g></svg>';-->
+<!--        button.href = '#';-->
+<!--        button.title = 'Locate Me';-->
+<!--        button.style.backgroundColor = 'white'-->
+<!--        button.style.borderRadius = '10px'-->
+<!--        button.style.cursor = 'pointer'-->
+<!--        button.style.width = '2rem'-->
+<!--        button.style.height = '2rem'-->
+<!--        button.onclick = function (e) {-->
+<!--            e.preventDefault();-->
+<!--            locateUser();-->
+<!--        };-->
+<!--        return button;-->
+<!--    };-->
+<!--    locateControl.addTo(map);-->
+
+<!--    function locateUser() {-->
+<!--        if (navigator.geolocation) {-->
+<!--            navigator.geolocation.getCurrentPosition(-->
+<!--                position => {-->
+<!--                    const { latitude, longitude } = position.coords;-->
+<!--                    reverse_locate(latitude, longitude)-->
+<!--                },-->
+<!--                () => {-->
+<!--                    console.log("Geolocation permission denied or not available.");-->
+<!--                }-->
+<!--            );-->
+<!--        } else {-->
+<!--            alert("Geolocation is not supported by your browser.");-->
+<!--        }-->
+<!--    }-->
+
+<!--    function reverse_locate(lat, long) {-->
+<!--        fetch(`https://photon.komoot.io/reverse?lat=${lat}&lon=${long}&radius=20`)-->
+<!--            .then(response => response.json())-->
+<!--            .then(data => {-->
+<!--                const locationName = `${data.features[0]?.properties?.name}, ${data.features[0]?.properties?.county}, ${data.features[0]?.properties?.country}` || "Unknown location";-->
+<!--                map.setView([lat, long], 13);-->
+<!--                L.marker([lat, long]).addTo(map)-->
+<!--                    .bindPopup(locationName)-->
+<!--                    .openPopup();-->
+<!--            })-->
+<!--            .catch(error => console.error("Error fetching location name:", error));-->
+<!--    }-->
+<!--</script>-->
+
+<%
+  product_categories = [
+    "Electronics", "Mobile Phones", "Computers & Tablets", "Cameras & Photography", "Home Audio & Theater", "Wearable Technology",
+    "TVs", "Headphones", "Video Game Consoles", "Smart Home Devices", "Computer Accessories", "Printers & Ink", "Software", "Clothing",
+    "Men's Clothing", "Women's Clothing", "Kids' Clothing", "Shoes", "Accessories", "Jewelry", "Watches", "Handbags & Wallets",
+    "Eyewear", "Home & Kitchen", "Furniture", "Home Décor", "Bedding & Bath", "Kitchen & Dining", "Storage & Organization", "Cleaning Supplies", "Small Appliances",
+    "Large Appliances", "Beauty & Personal Care", "Makeup", "Skincare", "Hair Care", "Fragrances", "Bath & Body", "Tools & Accessories", "Men's Grooming",
+    "Books", "Magazines", "Comics & Graphic Novels", "Music CDs & Vinyl", "Movies & TV Shows", "Sports & Outdoors", "Exercise & Fitness", "Outdoor Recreation",
+    "Cycling", "Camping & Hiking", "Hunting & Fishing", "Team Sports", "Water Sports", "Winter Sports", "Toys & Games", "Baby Products",
+    "Kids' Furniture", "Baby Gear", "Puzzles", "Educational Toys", "Dolls & Action Figures", "Remote Control Toys", "Automotive", "Car Electronics",
+    "Car Accessories", "Tires & Wheels", "Motorcycle & Powersports", "Car Parts", "RV Parts & Accessories", "Health & Wellness", "Vitamins & Supplements",
+    "Medical Supplies", "Fitness & Nutrition", "Health Monitors", "Home Medical Equipment", "Grocery & Gourmet Food", "Snacks", "Beverages",
+    "Pantry Staples", "Specialty Foods", "Organic Products", "Dairy & Cheese", "Office Supplies", "Printers & Office Electronics", "Office Furniture", "Writing & Correction Supplies",
+    "Paper Products", "Presentation Supplies", "Filing & Organization", "Pet Supplies", "Dog Supplies", "Cat Supplies", "Fish & Aquatic Pets",
+    "Bird Supplies", "Reptile & Amphibian Supplies", "Small Animal Supplies", "Musical Instruments", "Guitars & Bass", "Keyboards & Pianos", "Drums & Percussion", "Wind Instruments",
+    "DJ Equipment", "Studio Recording Equipment", "Music Accessories", "Video Games", "PC Gaming", "Console Games", "Virtual Reality",
+    "Gaming Accessories", "Mobile Gaming", "Garden & Outdoor", "Outdoor Furniture", "Grills & Outdoor Cooking", "Lawn & Garden Tools", "Garden Décor", "Plants, Seeds & Bulbs",
+    "Industrial & Scientific", "Lab & Scientific Products", "Janitorial & Sanitation Supplies", "Professional Medical Supplies", "Packaging & Shipping Supplies", "Occupational Health & Safety",
+    "Arts, Crafts & Sewing", "Painting, Drawing & Art Supplies", "Sewing & Quilting", "Fabric", "Crafting", "Scrapbooking",
+    "Tools & Home Improvement", "Power Tools", "Hand Tools", "Plumbing", "Electrical", "Lighting", "Building Supplies", "Paint & Wall Treatments",
+    "Safety & Security", "Personal Care Appliances", "Electric Shavers", "Hair Styling Tools", "Massage Tools", "Oral Care", "Travel & Luggage", "Luggage", "Travel Accessories", "Backpacks", "Duffel Bags",
+    "Suitcases", "Food & Beverages", "Alcoholic Beverages", "Coffee & Tea", "Snacks & Candy", "Breakfast Foods", "Condiments & Sauces", "Home Improvement", "Bathroom Hardware",
+    "Smart Home Systems", "Outdoor Storage", "Windows & Window Coverings", "Doors & Door Hardware"
+  ]
+%>
+
+<% showcase_products = [{'Electronics': 'https://cdn.pixabay.com/photo/2013/07/12/18/39/smartphone-153650_1280.png'}, { 'watches': 'https://cdn.pixabay.com/photo/2013/07/12/15/50/ticker-150395_1280.png' }, { 'Fragrances': 'https://cdn.pixabay.com/photo/2021/02/26/05/27/perfume-6050758_1280.png' }, { 'Backpacks': 'https://cdn.pixabay.com/photo/2013/07/12/18/58/backpack-154121_1280.png' },
+                        {'Shoes': 'https://cdn.pixabay.com/photo/2013/07/13/10/45/shoes-157716_1280.png'}, {'Jewelry': 'https://cdn.pixabay.com/photo/2021/09/03/07/31/ring-6595211_1280.png'}, {'Makeup': 'https://cdn.pixabay.com/photo/2013/07/13/12/50/beauty-160457_1280.png'} , {'Suitcases': 'https://cdn.pixabay.com/photo/2013/07/13/12/47/suitcase-160345_1280.png'}, {'Clothing': 'https://cdn.pixabay.com/photo/2013/07/12/14/30/dress-148354_1280.png'},
+                        {'Accessories': 'https://cdn.pixabay.com/photo/2013/07/13/12/17/headphone-159569_1280.png'}, {'Automotive': 'https://cdn.pixabay.com/photo/2017/02/01/10/42/pickup-truck-2029550_1280.png'}, {'Furniture': 'https://cdn.pixabay.com/photo/2016/03/31/19/36/antique-1295153_1280.png'}, {'Books': 'https://cdn.pixabay.com/photo/2013/07/13/11/35/book-158441_1280.png'}, {'Snacks': 'https://cdn.pixabay.com/photo/2013/07/13/12/49/chips-160417_1280.png'}] %>
+
+<main class="max-h-screen max-w-screen overflow-x-hidden" id="scroll_container">
+  <div id="showcase__slider">
+    <%= render 'slider' %>
+  </div>
+  <div class="px-20">
+    <div id="showcase__category__shops" class="grid grid-cols-12 gap-3 -mt-[4rem] relative">
+      <div id="categories_showcase" class="-translate-x-full transition-all duration-1000 ease-in-out col-span-6 h-[12rem] border border-gray-100 shadow-lg bg-white rounded-lg">
+        <div class="flex flex-row justify-between px-6 py-5">
+          <p class="text-md font-semibold">Categories</p>
+          <button class="text-[#FF8717] text-sm cursor-pointer hover:underline">See more</button>
+        </div>
+        <section id="category-carousel" class="splide px-6">
+          <div class="splide__track">
+            <ul class="splide__list gap-4">
+              <% showcase_products.each do |product| %>
+                <li class="splide__slide group flex flex-col justify-start cursor-pointer items-center border border-gray-300 rounded-lg !w-[5rem] py-2">
+                  <%= image_tag product.values.first, class: "w-12 h-12" %>
+                  <p class="text-xs font-normal mt-3 group-hover:underline"><%= product.keys.first %></p>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </section>
+      </div>
+      <div id="shops_showcase" class="translate-x-full transition-all duration-1000 ease-in-out col-span-6 h-[12rem] border border-gray-100 shadow-lg bg-white rounded-lg">
+        <div class="flex flex-row justify-between px-6 py-5">
+          <p class="text-md font-semibold">Shops</p>
+          <button class="text-[#FF8717] text-sm cursor-pointer hover:underline">See more</button>
+        </div>
+        <section id="shops-carousel" class="splide px-6">
+          <div class="splide__track">
+            <ul class="splide__list gap-4">
+              <% Shop.all.each do |shop| %>
+                <li class="splide__slide group cursor-pointer flex flex-col justify-start items-center border border-gray-300 rounded-lg !w-[5rem] py-2">
+                  <% if shop.shop_image.attached? %>
+                    <img class="w-12 h-12 fill-[#0F0F0F] dark:fill-white" src="<%= rails_blob_path(shop.shop_image) %>">
+                  <% else %>
+                    <svg class="w-12 h-12 fill-[#0F0F0F] dark:fill-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M5.13238 1C4.07859 1 3.10207 1.5529 2.5599 2.45651L0.615776 5.69672C0.17816 6.42608 0.0121122 7.42549 0.508798 8.32014C0.789678 8.82607 1.27459 9.55181 2 10.1205V20C2 21.6569 3.34315 23 5 23H8C9.10457 23 10 22.1046 10 21V15H14V21C14 22.1046 14.8954 23 16 23H19C20.6569 23 22 21.6569 22 20V10.1205C22.7254 9.55181 23.2103 8.82607 23.4912 8.32014C23.9879 7.42548 23.8218 6.42608 23.3842 5.69672L21.4401 2.45651C20.8979 1.5529 19.9214 1 18.8676 1H5.13238ZM20 10.9697C19.8391 10.9895 19.6725 11 19.5 11C18.1259 11 17.1126 10.3216 16.4364 9.60481C16.2632 9.4211 16.1082 9.23119 15.9705 9.04325C15.2167 9.98812 13.9542 11 12 11C10.0458 11 8.7833 9.98812 8.02952 9.04325C7.89183 9.23119 7.73684 9.4211 7.56355 9.60481C6.8874 10.3216 5.87405 11 4.5 11C4.32752 11 4.16089 10.9895 4 10.9697V20C4 20.5523 4.44772 21 5 21H8V15C8 13.8954 8.89543 13 10 13H14C15.1046 13 16 13.8954 16 15V21H19C19.5523 21 20 20.5523 20 20V10.9697ZM4.27489 3.4855C4.45561 3.1843 4.78112 3 5.13238 3H18.8676C19.2189 3 19.5444 3.1843 19.7251 3.4855L21.6692 6.72571C21.8324 6.99765 21.8127 7.2231 21.7426 7.34937C21.2851 8.17345 20.5493 9 19.5 9C18.8448 9 18.323 8.69006 17.8913 8.23245C17.4506 7.76524 17.1659 7.20393 17.0284 6.88399C16.8114 6.37951 16.3329 6.21388 16.0033 6.21248C15.674 6.21109 15.1982 6.37172 14.9752 6.8683C14.6702 7.54754 13.7982 9 12 9C10.2018 9 9.32978 7.54754 9.0248 6.8683C8.80182 6.37172 8.32598 6.21109 7.99667 6.21248C7.66706 6.21388 7.18855 6.37951 6.97164 6.88399C6.83407 7.20393 6.5494 7.76524 6.10869 8.23245C5.67703 8.69006 5.15524 9 4.5 9C3.45065 9 2.71491 8.17345 2.2574 7.34937C2.1873 7.2231 2.1676 6.99765 2.33076 6.72571L4.27489 3.4855Z"></path> </g></svg>
+                  <% end %>
+                  <p class="text-xs font-normal mt-3 group-hover:underline"><%= shop.name %></p>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div id="special_products" class="translate-y-full transition-all duration-1000 ease-in-out mt-10 h-[23rem] border border-gray-200 shadow-xl bg-white rounded-lg">
+      <div class="flex flex-row justify-between px-6 py-5">
+        <p class="text-md font-semibold">Special Products for you</p>
+        <button class="text-[#FF8717] text-sm cursor-pointer hover:underline">See more</button>
+      </div>
+      <section id="special-products-carousel" class="splide px-7">
+        <div class="splide__track">
+          <ul class="splide__list gap-2">
+            <% @other_products&.each do |product| %>
+              <a href="/shop/user/products/<%= product.id %>" class="splide__slide flex flex-col justify-start border border-gray-200 h-[17.5rem] min-w-[14.8rem] rounded-md">
+                <%= render 'product', product: product %>
+              </a>
+            <% end %>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <div id="div2" class="opacity-0 translate-x-full transition-all duration-1000 mt-10 h-auto p-4 border border-gray-200 shadow-xl bg-white rounded-lg">
+      <div class="flex flex-row justify-between px-6 py-5">
+        <p class="text-md font-semibold">Other Products</p>
+        <button class="text-[#FF8717] text-sm cursor-pointer hover:underline">See more</button>
+      </div>
+      <div class="flex flex-row justify-center flex-wrap gap-4 ">
+        <% @other_products&.each do |product| %>
+          <a href="/shop/user/products/<%= product.id %>" class="flex flex-col justify-start border border-gray-200 h-[17.5rem] min-w-[14.8rem] rounded-md">
+            <%= render 'product', product: product %>
+          </a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%= javascript_include_tag('/shop/user/spilder') %>

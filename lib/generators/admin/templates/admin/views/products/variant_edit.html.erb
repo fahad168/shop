@@ -7,12 +7,12 @@
   <div class="mt-10">
     <div class="flex flex-col sm:flex-row gap-2 mb-6">
       <div class="w-full">
-        <label class="block mb-2 text-sm font-normal text-[#000000] dark:text-white">Color (Optional)</label>
-        <input value="<%= variant.color %>" data-coloris name="<%= variant.id %>[color]" id="color<%= count %>" class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black  block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="Enter" />
+        <label class="block mb-2 text-sm font-normal text-[#000000] dark:text-white">Color</label>
+        <input required value="<%= variant.color %>" data-coloris name="<%= variant.id %>[color]" id="color<%= count %>" class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black  block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="Enter" />
       </div>
       <div class="w-full">
-        <label class="block mb-2 text-sm font-normal text-[#000000]">Size (Optional)</label>
-        <select id="<%= count %>" multiple name="<%= variant.id %>[size][]" class="block chosen-select<%= count %> border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black w-full px-5 py-[10px]">
+        <label class="block mb-2 text-sm font-normal text-[#000000] dark:text-white">Size</label>
+        <select required id="<%= count %>" multiple name="<%= variant.id %>[size][]" class="block chosen-select<%= count %> border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black w-full px-5 py-[10px]">
           <option>S</option>
           <option>M</option>
           <option>L</option>
@@ -26,14 +26,24 @@
       <% variant.sizes&.each_with_index do |size, index| %>
         <div class="mb-6">
           <div class="w-full sm:max-w-[327px]">
-            <label class="block mb-2 text-sm font-normal text-[#000000] dark:bg-white">Quantity (<%= size.name %>)</label>
+            <label class="block mb-2 text-sm font-normal text-[#000000] dark:text-white">Quantity (<%= size.name %>)</label>
             <input id="<%= size.name %>" type="number" value="<%= size.in_stock %>" name="<%= variant.id %>[in_stock][]" class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none">
           </div>
         </div>
       <% end %>
     </div>
     <div class="my-6">
-      <p class=" text-sm font-normal mb-2 text-[#000000] dark:bg-white">Upload Image <span class="text-[red]">*</span></p>
+      <p class=" text-sm text-[#000000] dark:text-white font-normal mb-2 flex gap-2">
+        Upload Image
+        <button type="button" data-tooltip-trigger="hover" data-tooltip-target="upload-tooltip-<%= count %>">
+          <svg class="fill-[gray] dark:fill-white mt-[2px] cursor-pointer hover:opacity-75" width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.47071 18C7.69067 18 5.95062 17.4722 4.47057 16.4832C2.99053 15.4943 1.83698 14.0887 1.15579 12.4442C0.474603 10.7996 0.296373 8.99002 0.64364 7.24419C0.990907 5.49836 1.84807 3.89471 3.10675 2.63604C4.36542 1.37737 5.96907 0.520203 7.71489 0.172936C9.46072 -0.17433 11.2703 0.00389956 12.9149 0.685088C14.5594 1.36628 15.965 2.51983 16.9539 3.99987C17.9429 5.47991 18.4707 7.21997 18.4707 9C18.4681 11.3861 17.519 13.6738 15.8318 15.3611C14.1445 17.0483 11.8568 17.9974 9.47071 18ZM9.47071 1.8C8.04668 1.8 6.65463 2.22228 5.4706 3.01342C4.28657 3.80457 3.36373 4.92905 2.81877 6.24468C2.27382 7.56031 2.13124 9.00799 2.40905 10.4047C2.68687 11.8013 3.3726 13.0842 4.37954 14.0912C5.38648 15.0981 6.66939 15.7838 8.06606 16.0617C9.46272 16.3395 10.9104 16.1969 12.226 15.6519C13.5417 15.107 14.6661 14.1841 15.4573 13.0001C16.2484 11.8161 16.6707 10.424 16.6707 9C16.6686 7.0911 15.9093 5.261 14.5595 3.9112C13.2097 2.5614 11.3796 1.80215 9.47071 1.8Z"/>
+            <path d="M9.47071 13.5C9.23201 13.5 9.00309 13.4052 8.83431 13.2364C8.66553 13.0676 8.57071 12.8387 8.57071 12.6V9H7.67071C7.43201 9 7.20309 8.90518 7.03431 8.7364C6.86553 8.56762 6.77071 8.3387 6.77071 8.1C6.77071 7.86131 6.86553 7.63239 7.03431 7.46361C7.20309 7.29482 7.43201 7.2 7.67071 7.2H9.47071C9.7094 7.2 9.93832 7.29482 10.1071 7.46361C10.2759 7.63239 10.3707 7.86131 10.3707 8.1V12.6C10.3707 12.8387 10.2759 13.0676 10.1071 13.2364C9.93832 13.4052 9.7094 13.5 9.47071 13.5Z"/>
+            <path d="M11.2707 13.5H7.67071C7.43201 13.5 7.20309 13.4052 7.03431 13.2364C6.86553 13.0676 6.77071 12.8387 6.77071 12.6C6.77071 12.3613 6.86553 12.1324 7.03431 11.9636C7.20309 11.7948 7.43201 11.7 7.67071 11.7H11.2707C11.5094 11.7 11.7383 11.7948 11.9071 11.9636C12.0759 12.1324 12.1707 12.3613 12.1707 12.6C12.1707 12.8387 12.0759 13.0676 11.9071 13.2364C11.7383 13.4052 11.5094 13.5 11.2707 13.5Z"/>
+            <path d="M9.02071 6.3C9.76629 6.3 10.3707 5.69559 10.3707 4.95C10.3707 4.20442 9.76629 3.6 9.02071 3.6C8.27512 3.6 7.67071 4.20442 7.67071 4.95C7.67071 5.69559 8.27512 6.3 9.02071 6.3Z"/>
+          </svg>
+        </button>
+      </p>
       <div class="flex flex-row justify-start w-full">
         <div id="selectedImages<%= count %>" class="mt-3 mb-2 max-h-[150px] overflow-x-auto flex space-x-2"></div>
         <% if variant.images.present? %>
@@ -42,7 +52,7 @@
             <% variant.images.each do |image| %>
               <div id="selected_div_<%= count %>_<%= image.image.blob.filename %>" class="relative">
                 <img src="<%= asset_path('cross_circle.svg') %>" class="absolute w-4 h-4 right-[4%] top-[4%] cursor-pointer hover:opacity-75" id="image_<%= count %>_<%= image.image.blob.filename %>" onclick="removeImageWithId('<%= count %>', '<%= image.image.blob.filename  %>', '<%= image.id %>')">
-                <img alt="<%= image.image.blob.filename %>" src="<%= image.image.blob.url %>" class="object-cover w-[150px] h-[150px] rounded-2xl" id="variant_images_<%= count %>">
+                <img alt="<%= image.image.blob.filename %>" src="<%= rails_blob_path(image.image) %>" class="object-cover w-[150px] h-[150px] rounded-2xl" id="variant_images_<%= count %>">
               </div>
             <% end %>
           </div>

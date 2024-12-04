@@ -1,0 +1,37 @@
+<style>
+    .splide__track--slide::marker {
+        content: none !important;
+    }
+
+    .splide__pagination {
+        justify-content: start !important;
+        margin-left: 10rem !important;
+        margin-bottom: 5.2rem !important;
+    }
+
+    .splide__pagination__page {
+        height: 5px !important;
+        width: 5px !important;
+        background: gray;
+    }
+
+    .splide__pagination__page.is-active {
+        width: 12px !important;
+        border-radius: 26% !important;
+        background: black
+    }
+</style>
+<div class="w-full relative">
+  <% images = ['https://images.pexels.com/photos/15752372/pexels-photo-15752372/free-photo-of-camera-menu-on-screen.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/1024864/pexels-photo-1024864.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'] %>
+  <section id="image-carousel" class="splide bg-[#F2F2F2] rounded-lg">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <% images&.each do |image| %>
+          <li class="splide__slide">
+            <%= image_tag image, class: "w-full object-cover h-[350px]" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+</div>

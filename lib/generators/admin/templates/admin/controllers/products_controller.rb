@@ -12,6 +12,12 @@ class Shop::Admin::ProductsController < ShopAdminController
     add_breadcrumb "New"
   end
 
+
+  def edit
+    @product = Product.find_by(id: params[:id])
+    add_breadcrumb @product.name
+  end
+
   def create
     response = ShopMethods::Product.new(@current_shop.id).create(params)
     if response[:status] == :created
@@ -21,9 +27,9 @@ class Shop::Admin::ProductsController < ShopAdminController
     end
   end
 
-  def edit
+  def show
     @product = Product.find_by(id: params[:id])
-    add_breadcrumb @product.name
+    @variant = @product.variants.first
   end
 
   def update
@@ -53,5 +59,12 @@ class Shop::Admin::ProductsController < ShopAdminController
 
   def variant_fields
     render json: { entries: render_to_string(partial: 'shop/admin/products/variant', locals: { count: params[:count], f: params[:f] }) }
+  end
+
+  def variant_info
+    @variant = Variant.find_by(id: params[:id])
+    render json: { variant_info: render_to_string(partial: 'shop/admin/products/variant_details', locals: { variant: @variant }),
+                   slider_images: render_to_string(partial: 'shop/admin/products/slider', locals: { variant: @variant }),
+                   images_present: @variant.images.present? }
   end
 end

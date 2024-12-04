@@ -1,0 +1,222 @@
+<%
+  product_categories = [
+  "Electronics", "Mobile Phones", "Computers & Tablets", "Cameras & Photography", "Home Audio & Theater", "Wearable Technology",
+  "TVs", "Headphones", "Video Game Consoles", "Smart Home Devices", "Computer Accessories", "Printers & Ink", "Software", "Clothing",
+  "Men's Clothing", "Women's Clothing", "Kids' Clothing", "Shoes", "Accessories", "Jewelry", "Watches", "Handbags & Wallets",
+  "Eyewear", "Home & Kitchen", "Furniture", "Home Décor", "Bedding & Bath", "Kitchen & Dining", "Storage & Organization", "Cleaning Supplies", "Small Appliances",
+  "Large Appliances", "Beauty & Personal Care", "Makeup", "Skincare", "Hair Care", "Fragrances", "Bath & Body", "Tools & Accessories", "Men's Grooming",
+  "Books", "Magazines", "Comics & Graphic Novels", "Music CDs & Vinyl", "Movies & TV Shows", "Sports & Outdoors", "Exercise & Fitness", "Outdoor Recreation",
+  "Cycling", "Camping & Hiking", "Hunting & Fishing", "Team Sports", "Water Sports", "Winter Sports", "Toys & Games", "Baby Products",
+  "Kids' Furniture", "Baby Gear", "Puzzles", "Educational Toys", "Dolls & Action Figures", "Remote Control Toys", "Automotive", "Car Electronics",
+  "Car Accessories", "Tires & Wheels", "Motorcycle & Powersports", "Car Parts", "RV Parts & Accessories", "Health & Wellness", "Vitamins & Supplements",
+  "Medical Supplies", "Fitness & Nutrition", "Health Monitors", "Home Medical Equipment", "Grocery & Gourmet Food", "Snacks", "Beverages",
+  "Pantry Staples", "Specialty Foods", "Organic Products", "Dairy & Cheese", "Office Supplies", "Printers & Office Electronics", "Office Furniture", "Writing & Correction Supplies",
+  "Paper Products", "Presentation Supplies", "Filing & Organization", "Pet Supplies", "Dog Supplies", "Cat Supplies", "Fish & Aquatic Pets",
+  "Bird Supplies", "Reptile & Amphibian Supplies", "Small Animal Supplies", "Musical Instruments", "Guitars & Bass", "Keyboards & Pianos", "Drums & Percussion", "Wind Instruments",
+  "DJ Equipment", "Studio Recording Equipment", "Music Accessories", "Video Games", "PC Gaming", "Console Games", "Virtual Reality",
+  "Gaming Accessories", "Mobile Gaming", "Garden & Outdoor", "Outdoor Furniture", "Grills & Outdoor Cooking", "Lawn & Garden Tools", "Garden Décor", "Plants, Seeds & Bulbs",
+  "Industrial & Scientific", "Lab & Scientific Products", "Janitorial & Sanitation Supplies", "Professional Medical Supplies", "Packaging & Shipping Supplies", "Occupational Health & Safety",
+  "Arts, Crafts & Sewing", "Painting, Drawing & Art Supplies", "Sewing & Quilting", "Fabric", "Crafting", "Scrapbooking",
+  "Tools & Home Improvement", "Power Tools", "Hand Tools", "Plumbing", "Electrical", "Lighting", "Building Supplies", "Paint & Wall Treatments",
+  "Safety & Security", "Personal Care Appliances", "Electric Shavers", "Hair Styling Tools", "Massage Tools", "Oral Care", "Travel & Luggage", "Luggage", "Travel Accessories", "Backpacks", "Duffel Bags",
+  "Suitcases", "Food & Beverages", "Alcoholic Beverages", "Coffee & Tea", "Snacks & Candy", "Breakfast Foods", "Condiments & Sauces", "Home Improvement", "Bathroom Hardware",
+  "Smart Home Systems", "Outdoor Storage", "Windows & Window Coverings", "Doors & Door Hardware"
+]
+%>
+
+<nav class="bg-white border border-gray-200 dark:bg-gray-900">
+  <div class="max-w-screen flex items-center justify-start p-3">
+    <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse ml-10">
+      <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
+      <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Website</span>
+    </a>
+    <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+      <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+        <div class="px-4 py-3">
+          <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
+          <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+        </div>
+        <ul class="py-2" aria-labelledby="user-menu-button">
+          <li>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+          </li>
+        </ul>
+      </div>
+      <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+        </svg>
+      </button>
+    </div>
+    <button class="flex items-center gap-3 hover:opacity-75 border border-gray-300 ml-20 px-4 py-2 rounded-lg map_location_selector" type="button">
+      <div class="flex flex-col w-full">
+        <div class="flex w-full items-center">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 21C15.5 17.4 19 14.1764 19 10.2C19 6.22355 15.866 3 12 3C8.13401 3 5 6.22355 5 10.2C5 14.1764 8.5 17.4 12 21Z" stroke="#000000" stroke-width="1.6799999999999997" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z" stroke="#000000" stroke-width="1.6799999999999997" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+          <p class="text-sm text-center font-normal text-black ml-1">Deliver to</p>
+        </div>
+        <p class="text-sm font-semibold ml-1">Lahore District</p>
+      </div>
+      <svg viewBox="0 0 1024 1024" class="icon w-4 h-4" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000" stroke-width="7.168000000000001"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z" fill="#000000"></path></g></svg>
+    </button>
+    <form class="w-[30rem] ml-20">
+      <div class="flex">
+        <button id="categories-button" data-dropdown-toggle="categories" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">All categories <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+        </svg></button>
+        <div class="relative w-full">
+          <input type="search" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border outline-none border-gray-300 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Shops, Products..." required />
+          <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+            <span class="sr-only">Search</span>
+          </button>
+        </div>
+      </div>
+    </form>
+    <% if current_user.present? %>
+      <div class="flex ml-20 gap-3">
+        <a href="/shop/user/cart" data-turbo="false" class="relative">
+          <% if current_user.cart.cart_items.count > 0 %>
+            <div class="absolute flex flex-row justify-center items-center bg-[#FF8717] w-4 h-4 rounded-full left-[67%] bottom-[69%]" style="z-index: 1;">
+              <p class="text-xs text-white" style="z-index: 2"><%= current_user.cart.cart_items.count %></p>
+            </div>
+          <% end %>
+          <svg class="w-10 h-10 cursor-pointer" viewBox="-7.68 -7.68 39.36 39.36" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0)"><g id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(0,0), scale(1)"><rect x="-7.68" y="-7.68" width="39.36" height="39.36" rx="19.68" fill="#e6e6e6" strokewidth="0"></rect></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.192"></g><g id="SVGRepo_iconCarrier">
+            <path d="M3.86376 16.4552C3.00581 13.0234 2.57684 11.3075 3.47767 10.1538C4.3785 9 6.14721 9 9.68462 9H14.3153C17.8527 9 19.6214 9 20.5222 10.1538C21.4231 11.3075 20.9941 13.0234 20.1362 16.4552C19.5905 18.6379 19.3176 19.7292 18.5039 20.3646C17.6901 21 16.5652 21 14.3153 21H9.68462C7.43476 21 6.30983 21 5.49605 20.3646C4.68227 19.7292 4.40943 18.6379 3.86376 16.4552Z" stroke="#000000" stroke-width="1.752"></path> <path d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4" stroke="#000000" stroke-width="1.752"></path> <path d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z" stroke="#000000" stroke-width="1.752"></path> </g>
+          </svg>
+        </a>
+        <svg class="w-10 h-10 cursor-pointer" viewBox="-4.32 -4.32 32.64 32.64" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"><rect x="-4.32" y="-4.32" width="32.64" height="32.64" rx="16.32" fill="#e6e6e6" strokewidth="0"></rect></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9 17.5V18.5C9 20.1569 10.3431 21 12 21C13.6569 21 15 20.1569 15 18.5V17.5M5.99999 8.5C5.99999 5.18629 8.68628 3.5 12 3.5C15.3137 3.5 18 5.18629 18 8.5C18 10.4392 18.705 12.6133 19.4316 14.3389C20.0348 15.7717 19.0222 17.5 17.4676 17.5H6.53237C4.97778 17.5 3.96518 15.7717 4.56842 14.3389C5.29493 12.6133 5.99999 10.4392 5.99999 8.5Z" stroke="#000000" stroke-width="1.8240000000000003" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+      </div>
+
+      <div class="w-[2px] h-8 bg-gray-400 mx-6"></div>
+
+      <div class="ml-5">
+        <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" type="button">
+          <span class="sr-only">Open user menu</span>
+          <img class="w-8 h-8 rounded-full" src="<%= current_user.profile_image.attached? ? rails_blob_path(current_user.profile_image) : asset_path('placeholder.png') %>" alt="user photo">
+        </button>
+      </div>
+    <% else %>
+      <div class="flex gap-4 mt-2 ml-6">
+        <a  href="/" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Sign in</a>
+        <a href="/users/sign_up" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Sign up</a>
+      </div>
+    <% end %>
+    <div class="flex ml-[8.5rem]">
+      <label>
+        <div class="w-9 h-10 cursor-pointer flex flex-col items-center justify-center border border-gray-100 shadow-lg rounded-lg">
+          <input class="hidden peer" type="checkbox" onchange="open_navbar_hamburger()" />
+          <div id="burger_bar" class="w-[50%] h-[2px] bg-black rounded-sm transition-all duration-300 origin-left translate-y-[0.45rem] peer-checked:rotate-[-45deg]"></div>
+          <div id="burger_bar" class="w-[50%] h-[2px] bg-black rounded-md transition-all duration-300 origin-center peer-checked:hidden"></div>
+          <div id="burger_bar" class="w-[50%] h-[2px] bg-black rounded-md transition-all duration-300 origin-left -translate-y-[0.45rem] peer-checked:rotate-[45deg]"></div>
+        </div>
+      </label>
+    </div>
+  </div>
+  <!-- Navbar menu -->
+  <div class="opacity-0 max-h-0 overflow-hidden transition-all duration-500 ease-in-out w-full" id="navbar-hamburger">
+    <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+      <li>
+        <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded dark:bg-blue-600" aria-current="page">Home</a>
+      </li>
+      <li>
+        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Services</a>
+      </li>
+      <li>
+        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white">Pricing</a>
+      </li>
+      <li>
+        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Contact</a>
+      </li>
+    </ul>
+  </div>
+  <!-- Categories menu -->
+  <div id="categories" style="z-index: 1;" class="hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-60 dark:bg-gray-700 p-2 mt-2">
+    <div>
+      <input autocomplete="off" type="text" id="search-dropdown" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" />
+    </div>
+    <ul id="category-list" class="py-2 h-[20rem] overflow-auto text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+      <% product_categories.each do |cate| %>
+        <li>
+          <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><%= cate %></button>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <!-- User menu -->
+  <% if current_user.present? %>
+    <div id="dropdownAvatar" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+      <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+        <div>Bonnie Green</div>
+        <div class="font-medium truncate"><%= current_user.email %></div>
+      </div>
+      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a>
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Payments History</a>
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Address</a>
+        </li>
+      </ul>
+      <div class="py-2">
+        <%= button_to destroy_user_session_path, method: :delete, class: "block px-4 py-2 text-sm w-full text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" do %>
+          Sign Out
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</nav>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById("search-dropdown");
+        const categoryList = document.getElementById("category-list");
+        const categories = categoryList.getElementsByTagName("li");
+
+        searchInput.addEventListener("input", function() {
+            var count = 0
+            const searchTerm = searchInput.value.toLowerCase();
+            Array.from(categories).forEach(function(item) {
+                const categoryText = item.textContent || item.innerText;
+                if (categoryText.toLowerCase().indexOf(searchTerm) > -1) {
+                    item.style.display = "";
+                    count += 1
+                } else {
+                    item.style.display = "none";
+                }
+                if (count <= 8) {
+                    categoryList.classList.remove('h-[20rem]')
+                    categoryList.classList.add('h-auto')
+                } else if (count > 8) {
+                    categoryList.classList.add('h-[20rem]')
+                    categoryList.classList.remove('h-auto')
+                }
+            });
+        });
+    });
+
+    function open_navbar_hamburger() {
+        const navbarHamburger = document.getElementById("navbar-hamburger");
+        document.querySelectorAll('#burger_bar').forEach(function (bar) {
+            bar.classList.toggle('ml-1')
+        })
+        navbarHamburger.classList.toggle("opacity-0");
+        navbarHamburger.classList.toggle("max-h-0");
+        navbarHamburger.classList.toggle("opacity-100");
+        navbarHamburger.classList.toggle("max-h-[500px]");
+    }
+</script>

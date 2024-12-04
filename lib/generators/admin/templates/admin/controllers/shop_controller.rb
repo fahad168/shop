@@ -19,9 +19,6 @@ class Shop::Admin::ShopController < ShopAdminController
     end
   end
 
-
-  def edit; end
-
   def update; end
 
   def destroy; end

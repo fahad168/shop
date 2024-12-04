@@ -1,0 +1,11 @@
+<div class="">
+  <div class="flex flex-row justify-start gap-40">
+    <h1 class="text-lg font-normal text-[#8F8F8F] dark:text-white mb-[17px]">Size: <span id="size" class="text-lg font-normal text-[#292929] dark:text-gray-400"><%= variant.sizes.present? ? variant.sizes.first.name : '' %></span></h1>
+    <h1 class="text-lg font-normal text-[#8F8F8F] dark:text-white mb-[17px]">Stock: <span id="stock" class="text-lg font-normal text-[#292929] dark:text-gray-400"><%= variant.sizes.present? ? variant.sizes.first.in_stock : '' %></span></h1>
+  </div>
+  <div class="flex flex-wrap gap-[13px]">
+    <% variant.sizes&.each_with_index do |size, index| %>
+      <button onclick="change_size_and_stock('<%= size.name %>', '<%= size.in_stock %>')" id="default-radio" type="button" value="" name="default-radio" class="w-[70px] h-[37px] rounded-lg flex justify-center items-center px-[29px] py-2 bg-gray-100 border-gray-300 text-[#525252] focus:text-[#141414] focus:border-[#333333] focus:bg-[#EBEBEB] focus:border focus:outline-transparent focus:ring-0 !outline-none"><%= size.name %></button>
+    <% end %>
+  </div>
+</div>

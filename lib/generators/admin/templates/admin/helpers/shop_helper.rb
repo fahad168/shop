@@ -14,4 +14,14 @@ module ShopHelper
     select_tag.html_safe
   end
 
+  def convert_rgb_to_color(color)
+    if color.start_with?("rgb")
+      rgb_values = color.scan(/\d+/).map(&:to_i)
+      Color::RGB.new(rgb_values[0], rgb_values[1], rgb_values[2])
+    elsif color.start_with?("hsl")
+      hsl_values = color.scan(/\d+/).map(&:to_f)
+      Color::HSL.new(hsl_values[0], hsl_values[1], hsl_values[2])
+    end
+  end
+
 end

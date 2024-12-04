@@ -1,0 +1,18 @@
+<div>
+  <p class="text-md text-gray-700 font-medium underline dark:text-gray-300"><%= title %></p>
+  <div class="flex flex-col justify-start gap-3 mt-4 col-span-4">
+    <div class="flex gap-1">
+      <% colors.each do |clr| %>
+        <%= render 'shop/admin/settings/color_btn', color: clr, click: "customize(#{clr}, #{style}, #{id1}, nil, #{input_id})" %>
+      <% end %>
+    </div>
+    <input value="<%= value %>" name="<%= name %>" class="hidden" id="<%= name %>">
+    <div class="flex items-center gap-2">
+      <label class="text-gray-500 text-xs font-medium text-center"><%= sub_title %></label>
+      <input value="<%= value %>" class="border border-gray-300 w-20 rounded-md outline-none px-2 py-0.5 text-sm dark:bg-transparent dark:border-gray-500 dark:text-white" oninput="preview_color(this, '<%= style %>', '<%= color_id1 %>', '<%= id1 %>', '<%= id2 %>', '<%= input_id %>')">
+      <div id="<%= color_id1 %>">
+        <%= render 'shop/admin/settings/color_btn', color: value, click: nil %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<style>
+    .img-zoom-lens {
+        position: absolute;
+        border: 1px solid #d4d4d4;
+        width: 130px;
+        height: 130px;
+        cursor: pointer;
+    }
+
+    .img-zoom-result {
+        border: 1px solid black;
+        width: 600px;
+        height: 500px;
+        border-radius: 5px;
+    }
+
+    #image-carousel-list.splide__slide {
+        background: white !important;
+    }
+</style>
+
+<section id="image-carousel" class="splide mb-[22px] bg-[#F2F2F2] rounded-lg">
+  <div class="splide__track">
+    <ul class="splide__list">
+      <% if variant.images.present?  %>
+        <% variant.images.each_with_index do |image, index| %>
+          <li class="splide__slide" onmouseleave="hideZoom()" onmouseenter="imageZoom('image_<%= index %>', 'image_zoom')">
+            <img src="<%= rails_blob_path(image.image) %>" id="image_<%= index %>" class="rounded-lg w-full h-[464px] object-cover">
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</section>
+<section id="thumbnail-carousel" class="splide">
+  <li class="splide__track">
+    <ul class="splide__list">
+      <% if variant.images.present?  %>
+        <% variant.images.each do |image| %>
+          <li class="splide__slide" onmouseenter="showcase_image(this)">
+            <%= image_tag rails_blob_path(image.image), class: "bg-[#F2F2F2] rounded-lg object-cover" %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+</section>
+
+<%= javascript_include_tag('/shop/user/splider') %>

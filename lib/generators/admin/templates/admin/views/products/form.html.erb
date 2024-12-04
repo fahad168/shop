@@ -1,23 +1,93 @@
+<style>
+
+    .tooltip-arrow {
+        margin-top: 10px;
+        width: 10px;
+        height: 10px;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid gray;
+        position: absolute;
+        color: inherit;
+    }
+
+    .tagify__dropdown.extra-properties .tagify__dropdown__item > img{
+        display: inline-block;
+        vertical-align: middle;
+        height: 20px;
+        transform: scale(.75);
+        margin-right: 5px;
+        border-radius: 2px;
+        transition: .12s ease-out;
+    }
+
+    .tagify__dropdown.extra-properties .tagify__dropdown__item--active > img,
+    .tagify__dropdown.extra-properties .tagify__dropdown__item:hover > img{
+        transform: none;
+        margin-right: 12px;
+    }
+
+    .tagify.countries .tagify__input{ min-width:175px; }
+
+    .tagify.countries tag{ white-space:nowrap; }
+    .tagify.countries tag img{
+        display: inline-block;
+        height: 16px;
+        margin-right: 3px;
+        border-radius: 2px;
+        pointer-events: none;
+    }
+
+</style>
+
 <div class="max-w-[662px] mx-auto">
   <p class="text-[red] text-md mb-6" id="variant_error"></p>
   <div class="flex flex-col sm:flex-row gap-2 mb-6">
     <div class="w-full">
       <label class="block mb-2 text-sm font-normal text-[#000000] dark:text-white ">Product Title  <span class="text-[#FF8717]">*</span></label>
-      <input autocomplete="off" value="<%= product.present? ? product.name : '' %>" name="name" class=" border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="Enter" required />
+      <input autocomplete="off" value="<%= product.present? ? product.name : '' %>" name="name" class=" border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-gray-400 block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="e.g. Shoes" required />
     </div>
     <div class="w-full">
       <label class="block mb-2 text-sm font-normal text-[#000000] dark:text-white">Price  <span class="text-[#FF8717]">*</span></label>
-      <input autocomplete="off" value="<%= product.present? ? product.price : '' %>" type="number" name="price" class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black  block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="Enter" required />
+      <input autocomplete="off" value="<%= product.present? ? product.price : '' %>" type="number" name="price" class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-gray-400 block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="e.g. 99" required />
     </div>
   </div>
   <div class="mb-6">
     <label class="block mb-2 text-sm font-medium text-[#000000] dark:text-white">Description  <span class="text-[#FF8717]">*</span></label>
     <textarea name="description" required rows="4" class="block p-2.5 w-full text-sm text-[#000000] h-[89px] rounded-lg border border-[#D1D5DB] focus:outline-transparent focus:border-gray-300 focus:ring-0 !outline-none dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none"><%= product.present? ? product.description : '' %></textarea>
   </div>
+  <div class="mb-6">
+    <label class="block mb-2 text-sm font-medium text-[#000000] dark:text-white">Care Instructions (Optional)</label>
+    <textarea name="care_instructions" rows="4" class="block p-2.5 w-full text-sm text-[#000000] h-[89px] rounded-lg border border-[#D1D5DB] focus:outline-transparent focus:border-gray-300 focus:ring-0 !outline-none dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none"><%= product.present? ? product.care_instructions : '' %></textarea>
+  </div>
+  <div class="grid grid-cols-2 gap-2">
+    <div class="w-full mb-6">
+      <label class="block mb-2 text-sm font-normal text-[#000000] dark:text-white">Estimated Delivery Days  <span class="text-[#FF8717]">*</span></label>
+      <input autocomplete="off" value="<%= product.present? ? product.estimated_delivery_days : '' %>" type="number" name="estimated_delivery_days" class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-gray-400 block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="7 days" required />
+    </div>
+    <div class="w-full mb-6">
+      <label class="block mb-2 text-sm font-normal text-[#000000] dark:text-white">Return Eligibility Days  <span class="text-[#FF8717]">*</span></label>
+      <input autocomplete="off" value="<%= product.present? ? product.return_eligibility_days : '' %>" type="number" name="return_eligibility_days" class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-gray-400 block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="3 days" required />
+    </div>
+  </div>
   <div class="grid grid-cols-2 gap-2">
     <div class="mb-6">
-      <label class="block mb-2 text-sm font-medium text-[#000000] dark:text-white">Delivery Fee  <span class="text-[#FF8717]">*</span></label>
-      <input autocomplete="off" type="number" value="<%= product.present? ? product.delivery_fee : '' %>" name="delivery_fee" required class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="Enter">
+      <label class="block mb-2 text-sm font-medium flex items-center text-[#000000] dark:text-white">
+        Discount
+        <button class="ml-2" type="button" data-tooltip-trigger="hover" data-tooltip-target="discount-tooltip">
+          <svg class="fill-[gray] dark:fill-white cursor-pointer hover:opacity-75" width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.47071 18C7.69067 18 5.95062 17.4722 4.47057 16.4832C2.99053 15.4943 1.83698 14.0887 1.15579 12.4442C0.474603 10.7996 0.296373 8.99002 0.64364 7.24419C0.990907 5.49836 1.84807 3.89471 3.10675 2.63604C4.36542 1.37737 5.96907 0.520203 7.71489 0.172936C9.46072 -0.17433 11.2703 0.00389956 12.9149 0.685088C14.5594 1.36628 15.965 2.51983 16.9539 3.99987C17.9429 5.47991 18.4707 7.21997 18.4707 9C18.4681 11.3861 17.519 13.6738 15.8318 15.3611C14.1445 17.0483 11.8568 17.9974 9.47071 18ZM9.47071 1.8C8.04668 1.8 6.65463 2.22228 5.4706 3.01342C4.28657 3.80457 3.36373 4.92905 2.81877 6.24468C2.27382 7.56031 2.13124 9.00799 2.40905 10.4047C2.68687 11.8013 3.3726 13.0842 4.37954 14.0912C5.38648 15.0981 6.66939 15.7838 8.06606 16.0617C9.46272 16.3395 10.9104 16.1969 12.226 15.6519C13.5417 15.107 14.6661 14.1841 15.4573 13.0001C16.2484 11.8161 16.6707 10.424 16.6707 9C16.6686 7.0911 15.9093 5.261 14.5595 3.9112C13.2097 2.5614 11.3796 1.80215 9.47071 1.8Z"/>
+            <path d="M9.47071 13.5C9.23201 13.5 9.00309 13.4052 8.83431 13.2364C8.66553 13.0676 8.57071 12.8387 8.57071 12.6V9H7.67071C7.43201 9 7.20309 8.90518 7.03431 8.7364C6.86553 8.56762 6.77071 8.3387 6.77071 8.1C6.77071 7.86131 6.86553 7.63239 7.03431 7.46361C7.20309 7.29482 7.43201 7.2 7.67071 7.2H9.47071C9.7094 7.2 9.93832 7.29482 10.1071 7.46361C10.2759 7.63239 10.3707 7.86131 10.3707 8.1V12.6C10.3707 12.8387 10.2759 13.0676 10.1071 13.2364C9.93832 13.4052 9.7094 13.5 9.47071 13.5Z"/>
+            <path d="M11.2707 13.5H7.67071C7.43201 13.5 7.20309 13.4052 7.03431 13.2364C6.86553 13.0676 6.77071 12.8387 6.77071 12.6C6.77071 12.3613 6.86553 12.1324 7.03431 11.9636C7.20309 11.7948 7.43201 11.7 7.67071 11.7H11.2707C11.5094 11.7 11.7383 11.7948 11.9071 11.9636C12.0759 12.1324 12.1707 12.3613 12.1707 12.6C12.1707 12.8387 12.0759 13.0676 11.9071 13.2364C11.7383 13.4052 11.5094 13.5 11.2707 13.5Z"/>
+            <path d="M9.02071 6.3C9.76629 6.3 10.3707 5.69559 10.3707 4.95C10.3707 4.20442 9.76629 3.6 9.02071 3.6C8.27512 3.6 7.67071 4.20442 7.67071 4.95C7.67071 5.69559 8.27512 6.3 9.02071 6.3Z"/>
+          </svg>
+        </button>
+      </label>
+      <input autocomplete="off" type="number" value="<%= product.present? ? product.discount : '' %>" name="discount" class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-gray-400 block w-full px-5 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="e.g 10">
+      <div id="discount-tooltip" role="tooltip" class="absolute z-10 invisible w-[20rem] inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+        You may leave the discount field blank. You can always update it later if you decide to offer a discount.
+        <div class="tooltip-arrow" data-popper-arrow></div>
+      </div>
     </div>
     <div class="mb-6 w-full">
       <label class="block mb-2 text-sm font-medium text-[#000000] dark:text-white">Country  <span class="text-[#FF8717]">*</span></label>
@@ -26,7 +96,31 @@
   </div>
   <div class="mb-6">
     <label class="block mb-2 text-sm font-medium text-[#000000] dark:text-white">Product Category  <span class="text-[#FF8717]">*</span></label>
-    <input required value="<%= product.present? ? product.categories : "" %>" name="categories" class='block advance-options border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black block w-full dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none'>
+    <input required value='<%= product.present? ? product.categories : '' %>' name="categories" class='block advance-options border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-black block w-full dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none'>
+  </div>
+  <div class="grid grid-cols-2 gap-2 mb-6">
+    <div class="w-full">
+      <label class="block mb-2 flex items-center text-sm font-medium text-[#000000] dark:text-white">
+        Dimensions
+        <button class="ml-2" type="button" data-tooltip-trigger="hover" data-tooltip-target="dimensions-tooltip">
+          <svg class="fill-[gray] dark:fill-white cursor-pointer hover:opacity-75" width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.47071 18C7.69067 18 5.95062 17.4722 4.47057 16.4832C2.99053 15.4943 1.83698 14.0887 1.15579 12.4442C0.474603 10.7996 0.296373 8.99002 0.64364 7.24419C0.990907 5.49836 1.84807 3.89471 3.10675 2.63604C4.36542 1.37737 5.96907 0.520203 7.71489 0.172936C9.46072 -0.17433 11.2703 0.00389956 12.9149 0.685088C14.5594 1.36628 15.965 2.51983 16.9539 3.99987C17.9429 5.47991 18.4707 7.21997 18.4707 9C18.4681 11.3861 17.519 13.6738 15.8318 15.3611C14.1445 17.0483 11.8568 17.9974 9.47071 18ZM9.47071 1.8C8.04668 1.8 6.65463 2.22228 5.4706 3.01342C4.28657 3.80457 3.36373 4.92905 2.81877 6.24468C2.27382 7.56031 2.13124 9.00799 2.40905 10.4047C2.68687 11.8013 3.3726 13.0842 4.37954 14.0912C5.38648 15.0981 6.66939 15.7838 8.06606 16.0617C9.46272 16.3395 10.9104 16.1969 12.226 15.6519C13.5417 15.107 14.6661 14.1841 15.4573 13.0001C16.2484 11.8161 16.6707 10.424 16.6707 9C16.6686 7.0911 15.9093 5.261 14.5595 3.9112C13.2097 2.5614 11.3796 1.80215 9.47071 1.8Z"/>
+            <path d="M9.47071 13.5C9.23201 13.5 9.00309 13.4052 8.83431 13.2364C8.66553 13.0676 8.57071 12.8387 8.57071 12.6V9H7.67071C7.43201 9 7.20309 8.90518 7.03431 8.7364C6.86553 8.56762 6.77071 8.3387 6.77071 8.1C6.77071 7.86131 6.86553 7.63239 7.03431 7.46361C7.20309 7.29482 7.43201 7.2 7.67071 7.2H9.47071C9.7094 7.2 9.93832 7.29482 10.1071 7.46361C10.2759 7.63239 10.3707 7.86131 10.3707 8.1V12.6C10.3707 12.8387 10.2759 13.0676 10.1071 13.2364C9.93832 13.4052 9.7094 13.5 9.47071 13.5Z"/>
+            <path d="M11.2707 13.5H7.67071C7.43201 13.5 7.20309 13.4052 7.03431 13.2364C6.86553 13.0676 6.77071 12.8387 6.77071 12.6C6.77071 12.3613 6.86553 12.1324 7.03431 11.9636C7.20309 11.7948 7.43201 11.7 7.67071 11.7H11.2707C11.5094 11.7 11.7383 11.7948 11.9071 11.9636C12.0759 12.1324 12.1707 12.3613 12.1707 12.6C12.1707 12.8387 12.0759 13.0676 11.9071 13.2364C11.7383 13.4052 11.5094 13.5 11.2707 13.5Z"/>
+            <path d="M9.02071 6.3C9.76629 6.3 10.3707 5.69559 10.3707 4.95C10.3707 4.20442 9.76629 3.6 9.02071 3.6C8.27512 3.6 7.67071 4.20442 7.67071 4.95C7.67071 5.69559 8.27512 6.3 9.02071 6.3Z"/>
+          </svg>
+        </button>
+      </label>
+      <div id="dimensions-tooltip" role="tooltip" class="absolute z-10 invisible w-[20rem] inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+        Product Dimensions must be like (Width * Height) e.g. (200 * 300). And must be Centimeters.
+        <div class="tooltip-arrow" data-popper-arrow></div>
+      </div>
+      <input autocomplete="off" value="<%= product.present? ? product.dimensions : '' %>" type="number" name="dimensions" class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-gray-400 block w-full px-3 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="Width * Height (cm)" />
+    </div>
+    <div>
+      <label class="block mb-2 text-sm font-medium text-[#000000] dark:text-white">Weight</label>
+      <input autocomplete="off" value="<%= product.present? ? product.weight : '' %>" type="number" name="weight" class="border border-[#e8e8e8] rounded-[5px] !outline-none text-[#000000] text-sm placeholder-gray-400 block w-full px-3 py-[10px] dark:text-white dark:bg-gray-700 dark:placeholder-gray-400 dark:border-none" placeholder="0.25 (kg)" />
+    </div>
   </div>
   <div class="flex flex-col" id="variants">
     <% if product.present? %>
@@ -51,7 +145,7 @@
 </div>
 <script>
     function createFileInput(count) {
-        const input = `<%= f.file_field :variant, class: 'dropzone_file hidden', multiple: true, accept: "image/jpeg, image/png, image/jpg" %>`
+        const input = `<%= f.file_field :variant, class: 'dropzone_file hidden', multiple: true, required: true, accept: "image/jpeg, image/png, image/jpg" %>`
         const fileInput = $(`#file_input_${count}`)
         fileInput.html(input);
         var dropzone = $('.dropzone_file')[0]
@@ -64,5 +158,4 @@
     }
 </script>
 
-<%= javascript_include_tag('shop') %>
-
+<%= javascript_include_tag('/shop/admin/shop') %>

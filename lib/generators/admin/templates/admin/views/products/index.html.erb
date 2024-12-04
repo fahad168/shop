@@ -1,3 +1,15 @@
+<style>
+    .hidden {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+    }
+</style>
+
 <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4 mt-10">
   <div>
     <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
@@ -67,7 +79,7 @@
   </div>
 </div>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" id="data-container">
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
     <tr>
       <th scope="col" class="p-4">
@@ -127,7 +139,7 @@
               <path d="M19 19.5H8.158C8.132 19.5 8.105 19.51 8.079 19.51C8.046 19.51 8.013 19.501 7.979 19.5H5V5.5H11.847L13.847 3.5H5C3.897 3.5 3 4.396 3 5.5V19.5C3 20.604 3.897 21.5 5 21.5H19C19.5304 21.5 20.0391 21.2893 20.4142 20.9142C20.7893 20.5391 21 20.0304 21 19.5V10.832L19 12.832V19.5Z" fill="#FF8717"/>
             </svg>
           </a>
-          <a href="#">
+          <a href="/shop/admin/products/<%= product.id %>">
             <svg class="cursor_pointer hover:opacity-75" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 5.5C6.612 5.5 2 10.836 2 12.5C2 14.242 5.546 19.5 12 19.5C18.454 19.5 22 14.242 22 12.5C22 10.836 17.388 5.5 12 5.5ZM12 15.5C11.4067 15.5 10.8266 15.3241 10.3333 14.9944C9.83994 14.6648 9.45542 14.1962 9.22836 13.6481C9.0013 13.0999 8.94189 12.4967 9.05764 11.9147C9.1734 11.3328 9.45912 10.7982 9.87868 10.3787C10.2982 9.95912 10.8328 9.6734 11.4147 9.55764C11.9967 9.44189 12.5999 9.5013 13.1481 9.72836C13.6962 9.95542 14.1648 10.3399 14.4944 10.8333C14.8241 11.3266 15 11.9067 15 12.5C15 13.2956 14.6839 14.0587 14.1213 14.6213C13.5587 15.1839 12.7956 15.5 12 15.5Z" fill="#FF8717"/>
             </svg>
@@ -154,7 +166,14 @@
             <% product.variants.each do |variant| %>
               <tr>
                 <td class="px-6 py-4"></td>
-                <td class="px-6 py-4"><%= variant.name %></td>
+                <td class="px-6 py-4 flex items-center">
+                  <% if variant.images.present? %>
+                    <img src="<%= rails_blob_path(variant.images.first.image) %>" class="border border-[<%= variant.color %>] h-8 w-8 rounded-full">
+                  <% else %>
+                    <div class="border border-[<%= variant.color %>] h-8 w-8 rounded-full text-md flex flex-row justify-center items-center"><%= variant.name.first.capitalize %></div>
+                  <% end %>
+                  <p class="text-center ml-2"><%= variant.name %></p>
+                </td>
                 <td class="px-6 py-4">
                   <div class="w-8 h-8 rounded-full bg-[<%= variant.color %>]"></div>
                 </td>
@@ -173,9 +192,8 @@
     </tbody>
   </table>
 </div>
-
-<!--<div class="pagination-container text-center mb-6 mx-5 md:mx-0 mt-5">-->
-  <%#= will_paginate @products %>
+<!--<div class="text-center mb-6 mx-5 md:mx-0 mt-5" id="demo">-->
+<%#= will_paginate @products %>
 <!--</div>-->
 
 <div class="hidden fixed inset-0 bg-black/60 transition-all duration-300" style="z-index: 100" id="product_overlay"></div>
@@ -196,7 +214,7 @@
           <path d="M21 3.5C17.5388 3.5 14.1554 4.52636 11.2775 6.44928C8.39967 8.37221 6.15665 11.1053 4.83212 14.303C3.50758 17.5007 3.16102 21.0194 3.83627 24.4141C4.51151 27.8087 6.17822 30.9269 8.62564 33.3744C11.0731 35.8218 14.1913 37.4885 17.5859 38.1637C20.9806 38.839 24.4993 38.4924 27.697 37.1679C30.8947 35.8433 33.6278 33.6003 35.5507 30.7225C37.4736 27.8446 38.5 24.4612 38.5 21C38.4949 16.3603 36.6495 11.912 33.3687 8.63126C30.088 5.35048 25.6397 3.5051 21 3.5ZM21 29.75C20.6539 29.75 20.3155 29.6474 20.0278 29.4551C19.74 29.2628 19.5157 28.9895 19.3832 28.6697C19.2508 28.3499 19.2161 27.9981 19.2836 27.6586C19.3512 27.3191 19.5178 27.0073 19.7626 26.7626C20.0073 26.5178 20.3191 26.3511 20.6586 26.2836C20.9981 26.2161 21.3499 26.2508 21.6697 26.3832C21.9895 26.5157 22.2628 26.74 22.4551 27.0277C22.6474 27.3155 22.75 27.6539 22.75 28C22.75 28.4641 22.5656 28.9092 22.2374 29.2374C21.9093 29.5656 21.4641 29.75 21 29.75ZM22.75 22.75C22.75 23.2141 22.5656 23.6592 22.2374 23.9874C21.9093 24.3156 21.4641 24.5 21 24.5C20.5359 24.5 20.0908 24.3156 19.7626 23.9874C19.4344 23.6592 19.25 23.2141 19.25 22.75V14C19.25 13.5359 19.4344 13.0907 19.7626 12.7626C20.0908 12.4344 20.5359 12.25 21 12.25C21.4641 12.25 21.9093 12.4344 22.2374 12.7626C22.5656 13.0907 22.75 13.5359 22.75 14V22.75Z" fill="#9CA3AF"/>
         </svg>
         <h3 class="mb-5 text-base font-bold text-[#000000] text-center mx-8" id="modal_text">Are you sure you want to Delete this Product?</h3>
-        <%= link_to "", data: { turbo_method: :delete }, id: 'product_destroy', class: 'text-[#1F2A37] hover:bg-[red] hover:text-white  border border-gray-200  font-medium rounded-lg text-sm inline-flex items-center px-[23px] py-2 text-center' do %>
+        <%= link_to "", data: { turbo: false }, method: :delete, id: 'product_destroy', class: 'text-[#1F2A37] hover:bg-[red] hover:text-white  border border-gray-200  font-medium rounded-lg text-sm inline-flex items-center px-[23px] py-2 text-center' do %>
           Yes
         <% end %>
         <button onclick="close_product_delete_modal()" type="button" class="py-2 px-3 ms-3 text-sm font-medium text-[#1F2A37] bg-white rounded-lg border border-gray-200 hover:bg-[#FF8717] hover:text-white">Cancel</button>
@@ -204,44 +222,4 @@
     </div>
   </div>
 </div>
-
-
-<script>
-    function close_product_delete_modal() {
-        document.getElementById('product-delete-modal').style.display = "none"
-        document.getElementById('product_overlay').style.display = "none"
-    }
-
-    function open_product_delete_modal(id) {
-        document.getElementById('product-delete-modal').style.display = "flex"
-        document.getElementById('product_overlay').style.display = "block"
-        document.getElementById('modal_text').innerText = 'Are you sure you want to Delete this Product?'
-        document.getElementById('product_destroy').href = `/shop/admin/products/${id}`
-    }
-
-    function check_select_ids(checkbox, id) {
-        var input = document.getElementById('product_ids')
-        var button = document.getElementById('destroy_button')
-        var ids_array = JSON.parse(input.value || "[]")
-        if(checkbox.checked) {
-            ids_array.push(id)
-        } else {
-            ids_array = ids_array.filter(item => item !== id);
-        }
-        if (ids_array.length === 0) {
-            button.classList.add('hidden')
-        } else {
-            button.classList.remove('hidden')
-            button.innerText = `${ids_array.length} Delete`
-        }
-        input.value = JSON.stringify(ids_array)
-    }
-
-    function open_multiple_product_modal() {
-        document.getElementById('product-delete-modal').style.display = "flex"
-        document.getElementById('product_overlay').style.display = "block"
-        var input = document.getElementById('product_ids')
-        document.getElementById('modal_text').innerText = 'Are you sure you want to Delete these Products?'
-        document.getElementById('product_destroy').href = `/shop/admin/products/multiple_destroy?ids=${input.value}`
-    }
-</script>
+<%= javascript_include_tag('/shop/adminshop') %>

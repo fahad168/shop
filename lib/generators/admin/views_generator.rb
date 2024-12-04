@@ -48,21 +48,31 @@ module Admin
               <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css" />
               <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
               <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
+              <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify@4.31.1/dist/tagify.min.js"></script>
+              <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify@4.31.1/dist/tagify.min.css" rel="stylesheet">
+              <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+              <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+              <script src="https://code.highcharts.com/highcharts.js"></script>
+              <script src="https://code.highcharts.com/modules/data.js"></script>
+              <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+              <script src="https://code.highcharts.com/modules/exporting.js"></script>
+              <script src="https://code.highcharts.com/modules/export-data.js"></script>
+              <script src="https://code.highcharts.com/modules/accessibility.js"></script>
             </head>
-            <body class="bg-white dark:bg-gray-800">
-            <%= render 'shop/admin/shared/toastr' %>
-            <% if @current_shop.present? %>
-              <%= render 'shop/admin/shared/sidebar' %>
-              <div class="p-4 sm:ml-64">
-                <div class="mt-[3rem]">
-                  <%= render_breadcrumbs %>
+              <body class="bg-white dark:bg-gray-800">
+              <%= render 'shop/admin/shared/toastr' %>
+              <% if @current_shop.present? %>
+                <%= render 'shop/admin/shared/sidebar' %>
+                <div class="p-4 sm:ml-64">
+                  <div class="mt-[4rem]">
+                    <%= render_breadcrumbs %>
+                  </div>
+                  <%= yield %>
                 </div>
+              <% else %>
                 <%= yield %>
-              </div>
-            <% else %>
-              <%= yield %>
-            <% end %>
-            </body>
+              <% end %>
+              </body>
             </html>
         EOF
       end
@@ -79,6 +89,12 @@ module Admin
         new_shop_content = File.read(new_shop_path)
         create_file "#{MAIN_PATH}/shop/new.html.erb", <<~EOF
           #{new_shop_content}
+        EOF
+
+        edit_shop_path = File.join(__dir__, "templates/admin/views/shop", "edit.html.erb")
+        edit_shop_content = File.read(edit_shop_path)
+        create_file "#{MAIN_PATH}/shop/edit.html.erb", <<~EOF
+          #{edit_shop_content}
         EOF
 
         template "views/shared/field_loader.html.erb", "#{MAIN_PATH}/shared/_field_loader.html.erb"
@@ -144,6 +160,30 @@ module Admin
         create_file "#{MAIN_PATH}/products/edit.html.erb", <<~EOF
           #{edit_content}
         EOF
+
+        show_path = File.join(__dir__, "templates/admin/views/products", "show.html.erb")
+        show_content = File.read(show_path)
+        create_file "#{MAIN_PATH}/products/show.html.erb", <<~EOF
+          #{show_content}
+        EOF
+
+        variant_details_path = File.join(__dir__, "templates/admin/views/products", "variant_details.html.erb")
+        variant_details_content = File.read(variant_details_path)
+        create_file "#{MAIN_PATH}/products/_variant_details.html.erb", <<~EOF
+          #{variant_details_content}
+        EOF
+
+        slider_path = File.join(__dir__, "templates/admin/views/products", "slider.html.erb")
+        slider_content = File.read(slider_path)
+        create_file "#{MAIN_PATH}/products/slider.html.erb", <<~EOF
+          #{slider_content}
+        EOF
+
+        size_path = File.join(__dir__, "templates/admin/views/products", "size.html.erb")
+        size_content = File.read(size_path)
+        create_file "#{MAIN_PATH}/products/size.html.erb", <<~EOF
+          #{size_content}
+        EOF
       end
 
       def copy_stylesheets
@@ -157,8 +197,20 @@ module Admin
       def copy_js
         js_path = File.join(__dir__, "templates/admin/assets/javascript", "shop.js")
         js_content = File.read(js_path)
-        create_file "app/javascript/shop.js", <<~EOF
+        create_file "app/javascript/shop/admin/shop.js", <<~EOF
           #{js_content}
+        EOF
+
+        highchart_js_path = File.join(__dir__, "templates/admin/assets/javascript", "highchart.js")
+        highchart_js_content = File.read(highchart_js_path)
+        create_file "app/javascript/shop/admin/highchart.js", <<~EOF
+          #{highchart_js_content}
+        EOF
+
+        admin_settings_js_path = File.join(__dir__, "templates/admin/assets/javascript", "admin_settings.js")
+        admin_settings_js_content = File.read(admin_settings_js_path)
+        create_file "app/javascript/shop/admin/settings.js", <<~EOF
+          #{admin_settings_js_content}
         EOF
       end
 
@@ -167,6 +219,18 @@ module Admin
         image_content = File.read(image_path)
         create_file "app/assets/images/cross_circle.svg", <<~EOF
           #{image_content}
+        EOF
+
+        placeholder_path = File.join(__dir__, "templates/admin/assets/images", "placeholder.png")
+        placeholder_content = File.read(placeholder_path)
+        create_file "app/assets/images/placeholder.png", <<~EOF
+          #{placeholder_content}
+        EOF
+
+        shop_png_path = File.join(__dir__, "templates/admin/assets/images", "shop.png")
+        shop_png_content = File.read(shop_png_path)
+        create_file "app/assets/images/shop.png", <<~EOF
+          #{shop_png_content}
         EOF
       end
 
