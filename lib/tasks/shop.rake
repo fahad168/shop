@@ -16,16 +16,16 @@ namespace :shop do
 
   desc "User Models Generator"
   task install: :environment do
-    Rails::Generators.invoke("user:models")
+    Rails::Generators.invoke("customer:models")
   end
 
   desc "User Controller And Routes Generator"
   task install: :environment do
-    Rails::Generators.invoke("user:controllers")
+    Rails::Generators.invoke("customer:controllers")
   end
 
   desc "User Views Generator"
   task install: :environment do
-    Rails::Generators.invoke("user:views")
+    Rails::Generators.invoke("customer:views")
   end
 end

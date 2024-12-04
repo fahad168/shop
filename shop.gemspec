@@ -63,13 +63,13 @@ Gem::Specification.new do |spec|
 
     Shop User Side:
       For generating shop user models, please run:
-          rails g user:models
+          rails g customer:models
   
       For generating shop user controllers and routes, please run:
-          rails g user:controllers
+          rails g customer:controllers
   
       For generating shop user views, please run:
-          rails g user:views
+          rails g customer:views
 
     For Uploading Images on Local (Compulsory)
       Active Storage Installation Required, please run:

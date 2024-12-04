@@ -1,7 +1,7 @@
 require "rails/generators"
 require "rails/generators/migration"
 
-module User
+module Customer
   module Generators
     class ModelsGenerator < Rails::Generators::Base
       include Rails::Generators::Migration

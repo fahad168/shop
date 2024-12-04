@@ -20,7 +20,6 @@ class Shop::User::CartController < ShopUserController
     @cart_item = current_user.cart.cart_items.find_by(id: params[:item_id])
     if @cart_item.present?
       @response = ShopMethods::CartItem.new(current_user.cart.id, nil, nil, nil).delete(@cart_item.id)
-      debugger
       render json: { items: render_to_string(partial: 'shop/user/cart/cart_items', locals: { cart_items: current_user.cart.cart_items }), message: @response[:message] }, status: :ok
     end
   end

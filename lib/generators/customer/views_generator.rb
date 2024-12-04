@@ -3,7 +3,7 @@
 require "rails/generators"
 require "rails/generators/migration"
 
-module User
+module Customer
   module Generators
     class ViewsGenerator < Rails::Generators::Base
       include Rails::Generators::Migration

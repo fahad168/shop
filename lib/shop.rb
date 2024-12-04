@@ -2,9 +2,9 @@
 
 require_relative "shop_methods/version"
 require "rails/railtie"
-require_relative "generators/user/models_generator"
-require_relative "generators/user/controllers_generator"
-require_relative "generators/user/views_generator"
+require_relative "generators/customer/models_generator"
+require_relative "generators/customer/controllers_generator"
+require_relative "generators/customer/views_generator"
 require_relative "generators/admin/models_generator"
 require_relative "generators/admin/controllers_generator"
 require_relative "generators/admin/views_generator"
