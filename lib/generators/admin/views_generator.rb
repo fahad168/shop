@@ -118,8 +118,6 @@ module Admin
         create_file "#{MAIN_PATH}/dashboard/index.html.erb", <<~EOF
           #{admin_dashboard_content}
         EOF
-
-        template "views/dashboard/index.html.erb", "#{MAIN_PATH}/dashboard/index.html.erb"
       end
 
       def copy_dashboard
