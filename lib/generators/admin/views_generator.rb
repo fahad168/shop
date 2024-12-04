@@ -113,6 +113,12 @@ module Admin
           #{toastr_content}
         EOF
 
+        admin_dashboard_path = File.join(__dir__, "templates/admin/views/dashboard", "index.html.erb")
+        admin_dashboard_content = File.read(admin_dashboard_path)
+        create_file "#{MAIN_PATH}/dashboard/index.html.erb", <<~EOF
+          #{admin_dashboard_content}
+        EOF
+
         template "views/dashboard/index.html.erb", "#{MAIN_PATH}/dashboard/index.html.erb"
       end
 
