@@ -188,6 +188,24 @@ module Admin
         create_file "#{MAIN_PATH}/products/size.html.erb", <<~EOF
           #{size_content}
         EOF
+
+        settings_path = File.join(__dir__, "templates/admin/views/settings", "index.html.erb")
+        settings_content = File.read(settings_path)
+        create_file "#{MAIN_PATH}/settings/index.html.erb", <<~EOF
+          #{settings_content}
+        EOF
+
+        color_btn_path = File.join(__dir__, "templates/admin/views/settings", "color_btn.html.erb")
+        color_btn_content = File.read(color_btn_path)
+        create_file "#{MAIN_PATH}/settings/_color_btn.html.erb", <<~EOF
+          #{color_btn_content}
+        EOF
+
+        shop_appearance_path = File.join(__dir__, "templates/admin/views/settings", "shop_appearance.html.erb")
+        shop_appearance_content = File.read(shop_appearance_path)
+        create_file "#{MAIN_PATH}/settings/_shop_appearance.html.erb", <<~EOF
+          #{shop_appearance_content}
+        EOF
       end
 
       def copy_stylesheets

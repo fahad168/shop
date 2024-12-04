@@ -73,7 +73,7 @@ Gem::Specification.new do |spec|
 
     For Uploading Images on Local (Compulsory)
       Active Storage Installation Required, please run:
-          rails g active_storage:install
+          rails active_storage:install
 
     After Doing all the steps, Run Command for Assets Compilation
       rails assets:precompile
